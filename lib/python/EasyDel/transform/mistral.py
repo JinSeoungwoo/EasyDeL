@@ -264,7 +264,10 @@ def mistral_from_pretrained(model_id, device=jax.devices('cpu')[0]):
     return: Weight or Params for EasyDel Model , Config
     """
     config = MistralConfig.from_pretrained(model_id)
+    config.vocab_size = 46080
     model = MistralForCausalLM.from_pretrained(model_id)
+    model.resize_token_embeddings(46080)
+    
     easydel_wights = mistral_convert_hf_to_flax(
         state_dict=model.state_dict(),
         config=config,
