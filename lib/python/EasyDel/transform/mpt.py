@@ -1,4 +1,6 @@
-from .. import MptConfig
+import gc
+
+from ..modules.mosaic_mpt import MptConfig
 from jax import numpy as jnp
 import jax
 import torch
@@ -154,4 +156,7 @@ def mpt_from_pretrained(model_id, device, **kwargs):
         device=device
     )
     config.add_jax_args()
+
+    del model
+    gc.collect()
     return easydel_wights, config

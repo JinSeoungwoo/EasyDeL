@@ -63,6 +63,11 @@ from .modules.lucid_transformer.modelling_lt_flax import (
     FlaxLTForCausalLM as FlaxLTForCausalLM
 )
 
+from .modules.auto_models import (
+    AutoEasyDelModelForCausalLM as AutoEasyDelModelForCausalLM,
+    get_modules_by_type as get_modules_by_type
+)
+
 from .utils.utils import (
     get_mesh as get_mesh,
     names_in_mesh as names_in_mesh,
@@ -73,7 +78,11 @@ from .utils.utils import (
 )
 
 from .trainer import (
-    CausalLMTrainer, TrainArguments, fsdp_train_step, get_training_modules
+    CausalLMTrainer,
+    TrainArguments,
+    create_fsdp_eval_step,
+    create_fsdp_train_step,
+    get_training_modules
 )
 
 from .linen import (
@@ -108,7 +117,7 @@ from .transform.falcon import (
     falcon_convert_pt_to_flax_7b as falcon_convert_pt_to_flax_7b,
     falcon_convert_flax_to_pt_7b as falcon_convert_flax_to_pt_7b,
     falcon_from_pretrained as falcon_from_pretrained,
-    falcon_convert_pt_to_flax as falcon_convert_pt_to_flax,
+    falcon_convert_hf_to_flax as falcon_convert_hf_to_flax,
     falcon_easydel_to_hf as falcon_easydel_to_hf
 )
 from .transform.mistral import (
@@ -120,4 +129,4 @@ from .transform.mistral import (
     mistral_easydel_to_hf as mistral_easydel_to_hf
 )
 
-__version__ = "0.0.38"
+__version__ = "0.0.40"

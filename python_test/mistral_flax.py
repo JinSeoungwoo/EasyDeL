@@ -1,4 +1,8 @@
 import copy
+
+import os
+
+os.environ["JAX_TRACEBACK_FILTERING"] = 'off'
 import jax
 
 try:
@@ -22,11 +26,11 @@ def main():
     torch.manual_seed(42)
 
     config = MistralConfig(
-        hidden_size=1024,
-        num_attention_heads=16,
+        hidden_size=128,
+        num_attention_heads=4,
         num_key_value_heads=8,
-        num_hidden_layers=4,
-        intermediate_size=768,
+        num_hidden_layers=2,
+        intermediate_size=128,
         gradient_checkpointing=''
     )
     print('Model Config :\n', config)
@@ -34,7 +38,7 @@ def main():
     torch_model = MistralForCausalLM(
         config=copy.deepcopy(config)
     )
-    params = {"params": mistral_convert_hf_to_flax(torch_model.state_dict(), config)}
+    params = {"params": mistral_convert_hf_to_flax(torch_model.state_dict(), config, jax.devices('cpu')[0])}
 
     np_random_input_ids = np.random.randint(0, config.vocab_size, (1, 128))
     input_ids = torch.from_numpy(np_random_input_ids).reshape(1, -1).to(torch.long)
@@ -42,6 +46,7 @@ def main():
     torch_output = torch_model(
         input_ids=input_ids
     )
+    config.add_jax_args()
     try:
 
         flax_model = FlaxMistralForCausalLM(

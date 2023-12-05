@@ -21,14 +21,13 @@
 # limitations under the License.
 """ GPT-J model configuration"""
 from collections import OrderedDict
-from typing import Any, List, Mapping, Optional
+from typing import Any, List, Mapping, Sequence
 
 from functools import partial
 from typing import Optional, Tuple
 
 from einops import einops
 from fjformer import with_sharding_constraint
-from jax.experimental.pjit import with_sharding_constraint as wsc
 from jax.sharding import PartitionSpec
 import flax.linen as nn
 import jax
@@ -46,15 +45,16 @@ from transformers.utils import logging
 from transformers import PreTrainedTokenizer, TensorType, is_torch_available
 from transformers.configuration_utils import PretrainedConfig
 from transformers.onnx import OnnxConfigWithPast, PatchingSpec
-from jax.interpreters import pxla
+
 from fjformer.attention import efficient_attention
-from ..flax_modelling_utils import with_sharding_constraint
+from ..flax_modelling_utils import with_sharding_constraint, JaxBaseClassModel
 import chex
+from fjformer.bits import config as q_config, q_flax
 
 logger = logging.get_logger(__name__)
 
 
-class GPTJConfig(PretrainedConfig):
+class GPTJConfig(PretrainedConfig, JaxBaseClassModel):
     model_type = "gptj"
     attribute_map = {
         "max_position_embeddings": "n_positions",
@@ -86,8 +86,12 @@ class GPTJConfig(PretrainedConfig):
             use_flash_attention: bool = False,
             flash_attn_query_chunk_size: int = 1024,
             flash_attn_key_chunk_size: int = 2048,
+            bits: Optional[int] = None,
+            axis_dims: Sequence[int] = (1, -1, 1, 1),
+            axis_names: Sequence[str] = ("dp", "fsdp", "tp", "mp"),
             **kwargs,
     ):
+        self.bits = bits
         self.vocab_size = vocab_size
         self.n_positions = n_positions
         self.n_embd = n_embd
@@ -110,7 +114,12 @@ class GPTJConfig(PretrainedConfig):
         self.use_flash_attention = use_flash_attention
         self.from_pt = False
         super().__init__(
-            bos_token_id=bos_token_id, eos_token_id=eos_token_id, tie_word_embeddings=tie_word_embeddings, **kwargs
+            axis_names=axis_names,
+            axis_dims=axis_dims,
+            bos_token_id=bos_token_id,
+            eos_token_id=eos_token_id,
+            tie_word_embeddings=tie_word_embeddings,
+            **kwargs
         )
 
     @staticmethod
@@ -143,43 +152,43 @@ class GPTJConfig(PretrainedConfig):
     def get_partition_rules(just_fsdp: bool = True):
         if just_fsdp:
             rules = (
-                ("model/wte/embedding", PartitionSpec("fsdp", )),
+                ("model/wte/embedding", PartitionSpec(("fsdp", "mp"), )),
 
-                ("attn/(k_proj|v_proj|q_proj)/kernel", PartitionSpec("fsdp", )),
-                ("attn/out_proj/kernel", PartitionSpec("fsdp", )),
+                ("attn/(k_proj|v_proj|q_proj)/kernel", PartitionSpec(("fsdp", "mp"), )),
+                ("attn/out_proj/kernel", PartitionSpec(("fsdp", "mp"), )),
 
-                ("mlp/fc_out/kernel", PartitionSpec("fsdp", )),
-                ("mlp/fc_out/bias", PartitionSpec("fsdp", )),
+                ("mlp/fc_out/kernel", PartitionSpec(("fsdp", "mp"), )),
+                ("mlp/fc_out/bias", PartitionSpec(("fsdp", "mp"), )),
 
-                ("mlp/fc_in/kernel", PartitionSpec("fsdp", )),
-                ("mlp/fc_in/bias", PartitionSpec("fsdp", )),
+                ("mlp/fc_in/kernel", PartitionSpec(("fsdp", "mp"), )),
+                ("mlp/fc_in/bias", PartitionSpec(("fsdp", "mp"), )),
 
-                ("lm_head/kernel", PartitionSpec("fsdp", )),
-                ("lm_head/bias", PartitionSpec("fsdp", )),
+                ("lm_head/kernel", PartitionSpec(("fsdp", "mp"), )),
+                ("lm_head/bias", PartitionSpec(("fsdp", "mp"), )),
                 ('.*', PartitionSpec(None)),
             )
         else:
             rules = (
-                ("model/wte/embedding", PartitionSpec('mp', "fsdp")),
+                ("model/wte/embedding", PartitionSpec('tp', ("fsdp", "mp"))),
 
-                ("attn/(k_proj|v_proj|q_proj)/kernel", PartitionSpec("fsdp", 'mp')),
-                ("attn/out_proj/kernel", PartitionSpec('mp', "fsdp", )),
+                ("attn/(k_proj|v_proj|q_proj)/kernel", PartitionSpec(("fsdp", "mp"), 'tp')),
+                ("attn/out_proj/kernel", PartitionSpec('tp', ("fsdp", "mp"), )),
 
-                ("mlp/fc_out/kernel", PartitionSpec("fsdp", 'mp')),
-                ("mlp/fc_out/bias", PartitionSpec("fsdp", 'mp')),
+                ("mlp/fc_out/kernel", PartitionSpec(("fsdp", "mp"), 'tp')),
+                ("mlp/fc_out/bias", PartitionSpec(("fsdp", "mp"), 'tp')),
 
-                ("mlp/fc_in/kernel", PartitionSpec('mp', "fsdp", )),
-                ("mlp/fc_in/bias", PartitionSpec('mp', "fsdp", )),
+                ("mlp/fc_in/kernel", PartitionSpec('tp', ("fsdp", "mp"), )),
+                ("mlp/fc_in/bias", PartitionSpec('tp', ("fsdp", "mp"), )),
 
-                ("lm_head/kernel", PartitionSpec('mp', "fsdp", )),
-                ("lm_head/bias", PartitionSpec('mp', "fsdp", )),
+                ("lm_head/kernel", PartitionSpec('tp', ("fsdp", "mp"), )),
+                ("lm_head/bias", PartitionSpec('tp', ("fsdp", "mp"), )),
                 ('.*', PartitionSpec(None)),
             )
         return rules
 
     @staticmethod
     def get_mesh_names():
-        return ('dp', 'fsdp', 'mp')
+        return "dp", "fsdp", "tp", "mp"
 
     def add_jax_args(
             self,
@@ -204,8 +213,28 @@ class GPTJConfig(PretrainedConfig):
             use_flash_attention: bool = False,
             flash_attn_query_chunk_size: int = 1024,
             flash_attn_key_chunk_size: int = 2048,
+            bits: Optional[int] = None,
+            axis_dims: Sequence[int] = (1, -1, 1, 1),
+            axis_names: Sequence[str] = ("dp", "fsdp", "tp", "mp"),
+            q_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            k_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            v_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            b_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec("dp", None, ("dp", "fsdp"), None),
+            a_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            backend: Optional[str] = None,
+            **kwargs,
     ):
+        self.axis_names = axis_names
+        self.axis_dims = axis_dims
+        self.q_ps = q_ps
+        self.k_ps = k_ps
+        self.v_ps = v_ps
+        self.b_ps = b_ps
+        self.a_ps = a_ps
+        self.backend = backend
+        self.axis_names = axis_names
         basics = dict(
+            bits=bits,
             vocab_size=vocab_size,
             n_positions=n_positions,
             n_embd=n_embd,
@@ -358,13 +387,22 @@ class FlaxGPTJAttention(nn.Module):
         self.head_dim = self.embed_dim // self.num_heads
 
         self.rotary_dim = config.rotary_dim
+        if self.config.bits is not None:
+            _dot_general_cls = q_config.fully_quantized(
+                fwd_bits=self.config.bits,
+                bwd_bits=self.config.bits
+            )
+        else:
+            _dot_general_cls = None
 
+        dot_general_cls = q_flax.QDotGeneral(_dot_general_cls)
         dense = partial(
             nn.Dense,
             self.embed_dim,
             use_bias=False,
             dtype=self.dtype,
             kernel_init=jax.nn.initializers.normal(self.config.initializer_range),
+            dot_general=dot_general_cls
         )
 
         self.q_proj, self.k_proj, self.v_proj = dense(), dense(), dense()
@@ -537,9 +575,27 @@ class FlaxGPTJMLP(nn.Module):
     def setup(self):
         embed_dim = self.config.hidden_size
         kernel_init = jax.nn.initializers.normal(self.config.initializer_range)
+        if self.config.bits is not None:
+            _dot_general_cls = q_config.fully_quantized(
+                fwd_bits=self.config.bits,
+                bwd_bits=self.config.bits
+            )
+        else:
+            _dot_general_cls = None
 
-        self.fc_in = nn.Dense(self.intermediate_size, dtype=self.dtype, kernel_init=kernel_init)
-        self.fc_out = nn.Dense(embed_dim, dtype=self.dtype, kernel_init=kernel_init)
+        dot_general_cls = q_flax.QDotGeneral(_dot_general_cls)
+        self.fc_in = nn.Dense(
+            self.intermediate_size,
+            dtype=self.dtype,
+            kernel_init=kernel_init,
+            dot_general=dot_general_cls
+        )
+        self.fc_out = nn.Dense(
+            embed_dim,
+            dtype=self.dtype,
+            kernel_init=kernel_init,
+            dot_general=dot_general_cls
+        )
 
         self.act = ACT2FN[self.config.activation_function]
         self.dropout = nn.Dropout(rate=self.config.resid_pdrop)
@@ -691,7 +747,7 @@ class FlaxGPTJPreTrainedModel(FlaxPreTrainedModel):
             mutable = ["cache"]
         else:
             mutable = False
-
+        rngs['params'] = jax.random.key(0)
         outputs = self.module.apply(
             inputs,
             jnp.array(input_ids, dtype="i4"),
@@ -833,11 +889,21 @@ class FlaxGPTJForCausalLMModule(nn.Module):
     dtype: jnp.dtype = jnp.float32
 
     def setup(self):
+        if self.config.bits is not None:
+            _dot_general_cls = q_config.fully_quantized(
+                fwd_bits=self.config.bits,
+                bwd_bits=self.config.bits
+            )
+        else:
+            _dot_general_cls = None
+
+        dot_general_cls = q_flax.QDotGeneral(_dot_general_cls)
         self.transformer = FlaxGPTJModule(self.config, dtype=self.dtype)
         self.lm_head = nn.Dense(
             self.config.vocab_size,
             dtype=self.dtype,
             kernel_init=jax.nn.initializers.normal(stddev=self.config.initializer_range),
+            dot_general=dot_general_cls
         )
 
     def __call__(

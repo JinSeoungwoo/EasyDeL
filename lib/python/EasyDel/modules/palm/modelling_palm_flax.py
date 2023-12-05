@@ -1,4 +1,4 @@
-from typing import Union, Optional, Tuple, Any, Mapping
+from typing import Union, Optional, Tuple, Any, Mapping, Sequence
 import jax
 import jax.numpy as jnp
 import numpy as onp
@@ -13,6 +13,7 @@ from jax.sharding import PartitionSpec
 from ..flax_modelling_utils import get_gradient_checkpoint_policy, \
     with_sharding_constraint
 import chex
+
 
 class PalmConfig(PretrainedConfig):
     def __init__(self,
@@ -57,24 +58,45 @@ class PalmConfig(PretrainedConfig):
     @staticmethod
     def get_partition_rules(fully_fsdp: bool = False):
         return (
-            ('wi/kernel', PartitionSpec('fsdp')),
-            ('attn_wo/kernel', PartitionSpec('fsdp', 'mp')),
-            ('ff_wo/kernel', PartitionSpec('fsdp', 'mp')),
-            ('wte/embedding', PartitionSpec('fsdp', 'mp')),
-            ('lm_head/kernel', PartitionSpec('fsdp')),
-            ('post_norm/kernel', PartitionSpec('fsdp')),
-            ('norm/kernel', PartitionSpec('fsdp', 'mp')),
+            ('wi/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('attn_wo/kernel', PartitionSpec(('fsdp', 'mp'), 'tp')),
+            ('ff_wo/kernel', PartitionSpec(('fsdp', 'mp'), 'tp')),
+            ('wte/embedding', PartitionSpec(('fsdp', 'mp'), 'tp')),
+            ('lm_head/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('post_norm/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('norm/kernel', PartitionSpec(('fsdp', 'mp'), 'tp')),
             ('.*', PartitionSpec(None)),
         ) if not fully_fsdp else (
-            ('wi/kernel', PartitionSpec('fsdp')),
-            ('attn_wo/kernel', PartitionSpec('fsdp')),
-            ('ff_wo/kernel', PartitionSpec('fsdp')),
-            ('wte/embedding', PartitionSpec('fsdp')),
-            ('lm_head/kernel', PartitionSpec('fsdp')),
-            ('post_norm/kernel', PartitionSpec('fsdp')),
-            ('norm/kernel', PartitionSpec('fsdp')),
-            ('.*', PartitionSpec('fsdp')),
+            ('wi/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('attn_wo/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('ff_wo/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('wte/embedding', PartitionSpec(('fsdp', 'mp'))),
+            ('lm_head/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('post_norm/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('norm/kernel', PartitionSpec(('fsdp', 'mp'))),
+            ('.*', PartitionSpec(('fsdp', 'mp'))),
         )
+
+    def add_jax_args(
+            self,
+            axis_dims: Sequence[int] = (1, -1, 1, 1),
+            axis_names: Sequence[str] = ("dp", "fsdp", "tp", "mp"),
+            q_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            k_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            v_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            b_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec("dp", None, ("dp", "fsdp"), None),
+            a_ps: jax.sharding.PartitionSpec = jax.sharding.PartitionSpec(("dp", "fsdp"), "mp", "tp", None),
+            backend: Optional[str] = None,
+            **kwargs,
+    ):
+        self.axis_names = axis_names
+        self.axis_dims = axis_dims
+        self.q_ps = q_ps
+        self.k_ps = k_ps
+        self.v_ps = v_ps
+        self.b_ps = b_ps
+        self.a_ps = a_ps
+        self.backend = backend
 
 
 class RMSNorm(nn.Module):
