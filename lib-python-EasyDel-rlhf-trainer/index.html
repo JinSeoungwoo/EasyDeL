@@ -1,0 +1,3317 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Erfan Zare Chavoshi">
+      
+      
+      
+        <link rel="prev" href="../lib-python-EasyDel-utils-checker/">
+      
+      
+        <link rel="next" href="../lib-python-EasyDel-rlhf-reward/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>trainer - EasyDel</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rlhftrainer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EasyDel" class="md-header__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EasyDel
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              trainer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EasyDel" class="md-nav__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EasyDel
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AvailableModels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AvailableModels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EasyBIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Eval
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Eval
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-eval-lm_eval/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lm_eval
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Transform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Transform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-easydel_transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    easydel_transform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mpt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mpt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-smi-smi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    smi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Serve
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Serve
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-torch_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    torch_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-jax_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jax_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-falcon-modelling_falcon_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-palm-modelling_palm_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Palm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-flax_modelling_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    flax_modelling_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_neo_x-modelling_gpt_neo_x_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-Neox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_j-modelling_gpt_j_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-J
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mistral-modelling_mistral_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-auto_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    auto_models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-lucid_transformer-modelling_lt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LucidTransformers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-opt-modelling_opt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mosaic_mpt-modelling_mpt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-llama-modelling_llama_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-t5-modelling_t5_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    T5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-configs-configs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    configs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-tensor_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tensor_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-prompters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    prompters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-checker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RLHF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            RLHF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    trainer
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    trainer
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      trainer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer.RLHFTrainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      RLHFTrainer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RLHFTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer.RLHFTrainer.learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      learn()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-reward/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    reward
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-ppo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ppo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-fsdp_train/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    fsdp_train
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-tf_dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tf_dataset
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-training_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    training_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linen
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Linen
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RL Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            RL Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_base.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_value_head.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_value_head
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-core.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data Preprocessing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Data Preprocessing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-data_preprocessing-_processor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    data_preprocessing/_processor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorchServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PytorchServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JAXServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JAXServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataProcessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataProcessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TrainingExample/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TrainingExample
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama2 Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MosaicMPT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MosaicMPT Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      trainer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer.RLHFTrainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      RLHFTrainer
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RLHFTrainer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rlhf.trainer.RLHFTrainer.learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      learn()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="rlhftrainer">rlhf.trainer</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="lib.python.EasyDel.rlhf.trainer"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="lib.python.EasyDel.rlhf.trainer.RLHFTrainer" class="doc doc-heading">
+          <code>RLHFTrainer</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+
+            <details class="quote">
+              <summary>Source code in <code>lib/python/EasyDel/rlhf/trainer.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span>
+<span class="normal">652</span>
+<span class="normal">653</span>
+<span class="normal">654</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span>
+<span class="normal">660</span>
+<span class="normal">661</span>
+<span class="normal">662</span>
+<span class="normal">663</span>
+<span class="normal">664</span>
+<span class="normal">665</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span>
+<span class="normal">670</span>
+<span class="normal">671</span>
+<span class="normal">672</span>
+<span class="normal">673</span>
+<span class="normal">674</span>
+<span class="normal">675</span>
+<span class="normal">676</span>
+<span class="normal">677</span>
+<span class="normal">678</span>
+<span class="normal">679</span>
+<span class="normal">680</span>
+<span class="normal">681</span>
+<span class="normal">682</span>
+<span class="normal">683</span>
+<span class="normal">684</span>
+<span class="normal">685</span>
+<span class="normal">686</span>
+<span class="normal">687</span>
+<span class="normal">688</span>
+<span class="normal">689</span>
+<span class="normal">690</span>
+<span class="normal">691</span>
+<span class="normal">692</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span>
+<span class="normal">710</span>
+<span class="normal">711</span>
+<span class="normal">712</span>
+<span class="normal">713</span>
+<span class="normal">714</span>
+<span class="normal">715</span>
+<span class="normal">716</span>
+<span class="normal">717</span>
+<span class="normal">718</span>
+<span class="normal">719</span>
+<span class="normal">720</span>
+<span class="normal">721</span>
+<span class="normal">722</span>
+<span class="normal">723</span>
+<span class="normal">724</span>
+<span class="normal">725</span>
+<span class="normal">726</span>
+<span class="normal">727</span>
+<span class="normal">728</span>
+<span class="normal">729</span>
+<span class="normal">730</span>
+<span class="normal">731</span>
+<span class="normal">732</span>
+<span class="normal">733</span>
+<span class="normal">734</span>
+<span class="normal">735</span>
+<span class="normal">736</span>
+<span class="normal">737</span>
+<span class="normal">738</span>
+<span class="normal">739</span>
+<span class="normal">740</span>
+<span class="normal">741</span>
+<span class="normal">742</span>
+<span class="normal">743</span>
+<span class="normal">744</span>
+<span class="normal">745</span>
+<span class="normal">746</span>
+<span class="normal">747</span>
+<span class="normal">748</span>
+<span class="normal">749</span>
+<span class="normal">750</span>
+<span class="normal">751</span>
+<span class="normal">752</span>
+<span class="normal">753</span>
+<span class="normal">754</span>
+<span class="normal">755</span>
+<span class="normal">756</span>
+<span class="normal">757</span>
+<span class="normal">758</span>
+<span class="normal">759</span>
+<span class="normal">760</span>
+<span class="normal">761</span>
+<span class="normal">762</span>
+<span class="normal">763</span>
+<span class="normal">764</span>
+<span class="normal">765</span>
+<span class="normal">766</span>
+<span class="normal">767</span>
+<span class="normal">768</span>
+<span class="normal">769</span>
+<span class="normal">770</span>
+<span class="normal">771</span>
+<span class="normal">772</span>
+<span class="normal">773</span>
+<span class="normal">774</span>
+<span class="normal">775</span>
+<span class="normal">776</span>
+<span class="normal">777</span>
+<span class="normal">778</span>
+<span class="normal">779</span>
+<span class="normal">780</span>
+<span class="normal">781</span>
+<span class="normal">782</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span>
+<span class="normal">786</span>
+<span class="normal">787</span>
+<span class="normal">788</span>
+<span class="normal">789</span>
+<span class="normal">790</span>
+<span class="normal">791</span>
+<span class="normal">792</span>
+<span class="normal">793</span>
+<span class="normal">794</span>
+<span class="normal">795</span>
+<span class="normal">796</span>
+<span class="normal">797</span>
+<span class="normal">798</span>
+<span class="normal">799</span>
+<span class="normal">800</span>
+<span class="normal">801</span>
+<span class="normal">802</span>
+<span class="normal">803</span>
+<span class="normal">804</span>
+<span class="normal">805</span>
+<span class="normal">806</span>
+<span class="normal">807</span>
+<span class="normal">808</span>
+<span class="normal">809</span>
+<span class="normal">810</span>
+<span class="normal">811</span>
+<span class="normal">812</span>
+<span class="normal">813</span>
+<span class="normal">814</span>
+<span class="normal">815</span>
+<span class="normal">816</span>
+<span class="normal">817</span>
+<span class="normal">818</span>
+<span class="normal">819</span>
+<span class="normal">820</span>
+<span class="normal">821</span>
+<span class="normal">822</span>
+<span class="normal">823</span>
+<span class="normal">824</span>
+<span class="normal">825</span>
+<span class="normal">826</span>
+<span class="normal">827</span>
+<span class="normal">828</span>
+<span class="normal">829</span>
+<span class="normal">830</span>
+<span class="normal">831</span>
+<span class="normal">832</span>
+<span class="normal">833</span>
+<span class="normal">834</span>
+<span class="normal">835</span>
+<span class="normal">836</span>
+<span class="normal">837</span>
+<span class="normal">838</span>
+<span class="normal">839</span>
+<span class="normal">840</span>
+<span class="normal">841</span>
+<span class="normal">842</span>
+<span class="normal">843</span>
+<span class="normal">844</span>
+<span class="normal">845</span>
+<span class="normal">846</span>
+<span class="normal">847</span>
+<span class="normal">848</span>
+<span class="normal">849</span>
+<span class="normal">850</span>
+<span class="normal">851</span>
+<span class="normal">852</span>
+<span class="normal">853</span>
+<span class="normal">854</span>
+<span class="normal">855</span>
+<span class="normal">856</span>
+<span class="normal">857</span>
+<span class="normal">858</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RLHFTrainer</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">config</span><span class="p">:</span> <span class="n">RLHFConfig</span><span class="p">,</span>
+                 <span class="n">dataset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DatasetDict</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">IterableDatasetDict</span><span class="p">,</span> <span class="n">IterableDataset</span><span class="p">],</span>
+                 <span class="n">tokenizer</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+                 <span class="n">model</span><span class="p">:</span> <span class="n">AVAILABLE_MODELS_FOR_RLHF</span><span class="p">,</span>
+                 <span class="n">reward_model</span><span class="p">:</span> <span class="n">RewardModel</span><span class="p">,</span>
+                 <span class="n">critic_model</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AVAILABLE_MODELS_FOR_RLHF</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">actor_critic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ActorCritic</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                 <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">track_memory</span><span class="p">:</span>
+            <span class="n">tracker</span><span class="o">.</span><span class="n">initialise_tracking</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">actor_critic</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">actor_critic</span> <span class="o">=</span> <span class="n">ActorCritic</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">critic_model</span><span class="o">=</span><span class="n">critic_model</span><span class="p">,</span>
+                <span class="n">pooled_values</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+                <span class="n">param_dtype</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">param_dtype</span><span class="p">,</span>
+                <span class="n">precision</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">precision</span>
+
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actor_critic</span> <span class="o">=</span> <span class="n">actor_critic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reward_model</span> <span class="o">=</span> <span class="n">reward_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">critic_model</span> <span class="o">=</span> <span class="n">critic_model</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">actor_optim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor_scheduler</span> <span class="o">=</span> <span class="n">RLHFConfig</span><span class="o">.</span><span class="n">get_optimizer_and_scheduler</span><span class="p">(</span>
+            <span class="n">learning_rate</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">actor_lr</span><span class="p">,</span>
+            <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">gradient_accumulation_steps</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="n">scheduler</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">scheduler</span><span class="p">,</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span>
+            <span class="n">learning_rate_end</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">actor_lr</span> <span class="o">-</span> <span class="mf">1e6</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">critic_optim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">critic_scheduler</span> <span class="o">=</span> <span class="n">RLHFConfig</span><span class="o">.</span><span class="n">get_optimizer_and_scheduler</span><span class="p">(</span>
+            <span class="n">learning_rate</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">critic_lr</span><span class="p">,</span>
+            <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">gradient_accumulation_steps</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="n">scheduler</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">scheduler</span><span class="p">,</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span>
+            <span class="n">learning_rate_end</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">critic_lr</span> <span class="o">-</span> <span class="mf">1e6</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_mesh</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">init_params</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">params_lm</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_actor</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_critic</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_reward</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">with</span> <span class="p">((</span><span class="n">jax</span><span class="o">.</span><span class="n">default_device</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">backend_offload</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))):</span>
+
+            <span class="k">if</span> <span class="n">params_actor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">params_actor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor_critic</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span>
+                            <span class="mi">0</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+                <span class="p">)</span>
+
+                <span class="n">params_actor</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">params_actor</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params_actor</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">(</span><span class="n">params_actor</span><span class="p">)</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">params_reward</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">params_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reward_model</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span>
+                            <span class="mi">0</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+                <span class="p">)</span>
+
+                <span class="n">params_reward</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">params_reward</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params_reward</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">(</span><span class="n">params_reward</span><span class="p">)</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">params_critic</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">params_critic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor_critic</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span>
+                            <span class="mi">0</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+                <span class="p">)</span>
+
+                <span class="n">params_critic</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">params_critic</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params_critic</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span>
+                    <span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">(</span><span class="n">params_actor</span><span class="p">)</span>
+                <span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">params_lm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">params_lm</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span><span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">(</span><span class="n">params_lm</span><span class="p">)[</span><span class="s1">&#39;params&#39;</span><span class="p">])</span>
+                <span class="n">lm_keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">params_lm</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1;31mLoadable Parameters from the Lm Params are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lm_keys</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">params_actor</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lm_keys</span><span class="p">:</span>
+                        <span class="n">params_actor</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">params_lm</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">params_critic</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lm_keys</span><span class="p">:</span>
+                        <span class="n">params_critic</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">params_lm</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">params_reward</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">lm_keys</span><span class="p">:</span>
+                        <span class="n">params_reward</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">params_lm</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">params_lm</span><span class="p">,</span>
+                <span class="n">params_actor</span><span class="p">,</span>
+                <span class="n">params_critic</span><span class="p">,</span>
+                <span class="n">params_reward</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">configure_funcs</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">partition_rules</span><span class="p">,</span>
+            <span class="n">params_lm</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_actor</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_critic</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">params_reward</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+
+        <span class="n">params_lm</span><span class="p">,</span> <span class="n">params_actor</span><span class="p">,</span> <span class="n">params_critic</span><span class="p">,</span> <span class="n">params_reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_params</span><span class="p">(</span>
+            <span class="n">params_lm</span><span class="o">=</span><span class="n">params_lm</span><span class="p">,</span>
+            <span class="n">params_actor</span><span class="o">=</span><span class="n">params_actor</span><span class="p">,</span>
+            <span class="n">params_critic</span><span class="o">=</span><span class="n">params_critic</span><span class="p">,</span>
+            <span class="n">params_reward</span><span class="o">=</span><span class="n">params_reward</span>
+        <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">create_train_state</span><span class="p">(</span>
+                <span class="n">params_actor_</span><span class="p">,</span>
+                <span class="n">params_critic_</span><span class="p">,</span>
+                <span class="n">params_reward_</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">TrainStateRLHF</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">TrainStateRLHF</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">actor_params</span><span class="o">=</span><span class="n">params_actor_</span><span class="p">,</span>
+                <span class="n">critic_params</span><span class="o">=</span><span class="n">params_critic_</span><span class="p">,</span>
+                <span class="n">reward_params</span><span class="o">=</span><span class="n">params_reward_</span><span class="p">,</span>
+                <span class="n">actor_optim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">actor_optim</span><span class="p">,</span>
+                <span class="n">critic_optim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">critic_optim</span><span class="p">,</span>
+                <span class="n">apply_fn_critic</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">critic_model</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span>
+                <span class="n">apply_fn_actor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">actor_critic</span><span class="o">.</span><span class="n">apply</span><span class="p">,</span>
+                <span class="n">apply_fn_reward</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reward_model</span><span class="o">.</span><span class="n">apply</span>
+            <span class="p">)</span>
+
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">eval_shape</span><span class="p">(</span>
+            <span class="n">create_train_state</span><span class="p">(</span>
+                <span class="n">params_actor_</span><span class="o">=</span><span class="n">params_actor</span><span class="p">,</span>
+                <span class="n">params_critic_</span><span class="o">=</span><span class="n">params_critic</span><span class="p">,</span>
+                <span class="n">params_reward_</span><span class="o">=</span><span class="n">params_reward</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">partition_specs</span> <span class="o">=</span> <span class="n">fjformer</span><span class="o">.</span><span class="n">match_partition_rules</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">rules</span><span class="o">=</span><span class="n">partition_rules</span><span class="p">)</span>
+        <span class="n">shard_fns</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fjformer</span><span class="o">.</span><span class="n">make_shard_and_gather_fns</span><span class="p">(</span>
+            <span class="n">partition_specs</span><span class="o">=</span><span class="n">partition_specs</span><span class="p">,</span>
+            <span class="n">dtype_specs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
+
+        <span class="n">sharded_create_train_state</span> <span class="o">=</span> <span class="n">pjit</span><span class="o">.</span><span class="n">pjit</span><span class="p">(</span>
+            <span class="n">create_train_state</span><span class="p">,</span>
+            <span class="n">in_shardings</span><span class="o">=</span><span class="p">(</span><span class="n">PartitionSpec</span><span class="p">(),</span> <span class="n">PartitionSpec</span><span class="p">(),</span> <span class="n">PartitionSpec</span><span class="p">()),</span>
+            <span class="n">out_shardings</span><span class="o">=</span><span class="p">(</span><span class="n">partition_specs</span><span class="p">,),</span>
+            <span class="n">backend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">backend</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sharded_create_train_state</span><span class="p">(</span>
+            <span class="n">params_actor</span><span class="p">,</span> <span class="n">params_critic</span><span class="p">,</span> <span class="n">params_reward</span>
+        <span class="p">),</span> <span class="n">partition_specs</span>
+
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">memory</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Deque</span><span class="p">[</span><span class="n">Memory</span><span class="p">],</span>
+            <span class="n">train_state</span><span class="p">:</span> <span class="n">TrainStateRLHF</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Memory Must be Deque of all prevision memories</span>
+<span class="sd">        train_state : TrainStateRLHF Type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">memory_dataloader</span> <span class="o">=</span> <span class="n">create_dataloader</span><span class="p">(</span>
+            <span class="n">memory</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">minibatch_size</span>
+        <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+                <span class="n">train_state</span><span class="p">:</span> <span class="n">TrainStateRLHF</span><span class="p">,</span>
+                <span class="n">input_ids</span><span class="p">,</span>
+                <span class="n">pm</span><span class="p">,</span>
+                <span class="n">rewards</span><span class="p">,</span>
+                <span class="n">old_values</span><span class="p">,</span>
+                <span class="n">attention_mask</span><span class="p">,</span>
+                <span class="n">old_action_probs</span><span class="p">,</span>
+                <span class="n">old_log_probs</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">def</span> <span class="nf">calculate_loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+                <span class="k">global</span> <span class="n">rewards</span>
+                <span class="k">global</span> <span class="n">old_values</span>
+
+                <span class="n">action_masks</span> <span class="o">=</span> <span class="o">~</span><span class="n">pm</span> <span class="o">&amp;</span> <span class="n">attention_mask</span>
+                <span class="n">action_logits</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">apply_fn_actor</span><span class="p">(</span>
+                    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">],</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span>
+                <span class="p">)</span>
+                <span class="n">action_logits</span> <span class="o">=</span> <span class="n">shift</span><span class="p">(</span><span class="n">action_logits</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">action_len</span> <span class="o">=</span> <span class="n">old_log_probs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">action_probs</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">action_logits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">action_log_probs</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">(</span><span class="n">action_probs</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">)</span>
+                <span class="n">action_log_probs</span> <span class="o">=</span> <span class="n">action_log_probs</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+                <span class="n">entropies</span> <span class="o">=</span> <span class="n">masked_entropy</span><span class="p">(</span><span class="n">action_probs</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">action_masks</span><span class="p">)</span>
+                <span class="n">kl_penalty</span> <span class="o">=</span> <span class="n">masked_mean</span><span class="p">(</span>
+                    <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">old_action_probs</span> <span class="o">*</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">old_action_probs</span><span class="p">)</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">action_probs</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span>
+                <span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">kl_div_loss_weight</span>
+
+                <span class="n">rewards</span> <span class="o">=</span> <span class="n">rewards</span> <span class="o">-</span> <span class="n">kl_penalty</span>
+                <span class="n">normalize_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">old_values</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">old_values</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">shift</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">old_values</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+
+                    <span class="n">old_values</span> <span class="o">=</span> <span class="n">old_values</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+                    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+                    <span class="n">rewards</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">rewards</span><span class="p">,</span> <span class="s1">&#39;b -&gt; b 1&#39;</span><span class="p">)</span>
+                    <span class="n">normalize_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">action_masks</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:])</span>
+
+                <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="n">rewards</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
+                    <span class="n">values</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;... -&gt; ... 1&#39;</span><span class="p">)</span>
+
+                <span class="n">ratios</span> <span class="o">=</span> <span class="p">(</span><span class="n">action_log_probs</span> <span class="o">-</span> <span class="n">old_log_probs</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
+                <span class="n">advantages</span> <span class="o">=</span> <span class="n">masked_normalize</span><span class="p">(</span><span class="n">rewards</span> <span class="o">-</span> <span class="n">old_values</span><span class="p">,</span> <span class="o">**</span><span class="n">normalize_kwargs</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">advantages</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">advantages</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">advantages</span><span class="p">,</span> <span class="s1">&#39;b -&gt; b 1&#39;</span><span class="p">)</span>
+
+                <span class="n">surr1</span> <span class="o">=</span> <span class="n">ratios</span> <span class="o">*</span> <span class="n">advantages</span>
+                <span class="n">surr2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eps_clip</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eps_clip</span><span class="p">)</span>
+                <span class="n">policy_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">surr1</span><span class="p">,</span> <span class="n">surr2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">beta_s</span> <span class="o">*</span> <span class="n">entropies</span>  <span class="c1"># Policy Loss</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">policy_loss</span><span class="p">)</span>  <span class="c1"># Loss</span>
+
+                <span class="n">value_loss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                    <span class="n">clipped_value_loss</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">old_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">value_clip</span><span class="p">))</span>  <span class="c1"># VLoss</span>
+                <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">value_loss</span>  <span class="c1"># I need gradient for these two losses</span>
+
+            <span class="n">grad</span><span class="p">,</span> <span class="p">(</span><span class="n">loss_</span><span class="p">,</span> <span class="n">value_loss_</span><span class="p">)</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">value_and_grad</span><span class="p">(</span><span class="n">calculate_loss</span><span class="p">)(</span><span class="n">train_state</span><span class="o">.</span><span class="n">actor_params</span><span class="p">)</span>
+            <span class="n">train_state</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span>
+                <span class="n">grad_actor</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span>  <span class="c1"># Based on Loss</span>
+                <span class="n">grads_critic</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">value_loss_</span><span class="p">)(</span><span class="n">train_state</span><span class="o">.</span><span class="n">critic_params</span><span class="p">)</span>  <span class="c1"># Based on Value Loss</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">train_state</span><span class="p">,</span> <span class="p">(</span><span class="n">loss_</span><span class="p">,</span> <span class="n">value_loss_</span><span class="p">)</span>
+
+        <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">autonotebook</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">epochs</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory_dataloader</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">track_memory</span><span class="p">:</span>
+            <span class="n">mem_res</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_mem</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mem_res</span> <span class="o">=</span> <span class="s1">&#39;Tracking Option is OFF&#39;</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">epochs</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="p">(</span>
+                    <span class="n">input_ids_</span><span class="p">,</span>
+                    <span class="n">pm_</span><span class="p">,</span>
+                    <span class="n">attention_mask_</span><span class="p">,</span>
+                    <span class="n">old_action_probs_</span><span class="p">,</span>
+                    <span class="n">old_log_probs_</span><span class="p">,</span>
+                    <span class="n">rewards_</span><span class="p">,</span>
+                    <span class="n">old_values_</span>
+            <span class="p">)</span> <span class="ow">in</span> <span class="n">memory_dataloader</span><span class="p">:</span>
+                <span class="n">train_state</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span>
+                    <span class="n">train_state</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask_</span><span class="p">,</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids_</span><span class="p">,</span>
+                    <span class="n">pm</span><span class="o">=</span><span class="n">pm_</span><span class="p">,</span>
+                    <span class="n">rewards</span><span class="o">=</span><span class="n">rewards_</span><span class="p">,</span>
+                    <span class="n">old_values</span><span class="o">=</span><span class="n">old_values_</span><span class="p">,</span>
+                    <span class="n">old_log_probs</span><span class="o">=</span><span class="n">old_log_probs_</span><span class="p">,</span>
+                    <span class="n">old_action_probs</span><span class="o">=</span><span class="n">old_action_probs_</span>
+                <span class="p">)</span>
+
+                <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span>
+                    <span class="n">loss</span><span class="o">=</span><span class="n">loss</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">track_memory</span><span class="p">:</span>
+                    <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">pbar</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">mem_res</span><span class="p">)</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">train_state</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">params_actor</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span><span class="p">,</span>
+            <span class="n">params_critic</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span><span class="p">,</span>
+            <span class="n">params_reward</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span><span class="p">,</span>
+            <span class="n">params_lm</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">FrozenDict</span><span class="p">,</span>
+            <span class="n">partition_rules</span><span class="p">,</span>
+            <span class="n">num_episodes</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span>
+            <span class="n">max_time_steps</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+            <span class="n">update_time_steps</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+            <span class="n">max_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+            <span class="n">max_sequence_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+            <span class="n">eos_token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">temperature</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">mesh</span><span class="p">:</span>
+
+            <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">memories</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">([])</span>
+            <span class="n">max_train_eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">num_rows</span>
+            <span class="k">assert</span> <span class="n">max_train_eps</span> <span class="o">&gt;</span> <span class="n">max_batch_size</span>
+            <span class="n">train_state</span><span class="p">,</span> <span class="n">partition_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configure_funcs</span><span class="p">(</span>
+                <span class="n">partition_rules</span><span class="o">=</span><span class="n">partition_rules</span><span class="p">,</span>
+                <span class="n">params_lm</span><span class="o">=</span><span class="n">params_lm</span><span class="p">,</span>
+                <span class="n">params_actor</span><span class="o">=</span><span class="n">params_actor</span><span class="p">,</span>
+                <span class="n">params_critic</span><span class="o">=</span><span class="n">params_critic</span><span class="p">,</span>
+                <span class="n">params_reward</span><span class="o">=</span><span class="n">params_reward</span>
+            <span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">get_rand</span><span class="p">():</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">max_train_eps</span><span class="p">)</span>
+
+            <span class="nd">@functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+                <span class="n">pjit</span><span class="o">.</span><span class="n">pjit</span><span class="p">,</span>
+                <span class="n">in_shardings</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">partition_specs</span><span class="p">,</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">()</span>
+                <span class="p">),</span>
+                <span class="n">out_shardings</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">(),</span>
+                        <span class="n">PartitionSpec</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
+                    <span class="n">train_state_</span><span class="p">:</span> <span class="n">TrainStateRLHF</span><span class="p">,</span>
+                    <span class="n">input_ids_</span><span class="p">,</span>
+                    <span class="n">attention_mask_</span>
+            <span class="p">):</span>
+                <span class="n">action_</span><span class="p">,</span> <span class="n">sequence_</span><span class="p">,</span> <span class="n">attention_mask_</span><span class="p">,</span> <span class="n">prompt_mask_</span><span class="p">,</span> <span class="n">action_logits_</span><span class="p">,</span> <span class="n">value_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actor_critic</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+                    <span class="n">params</span><span class="o">=</span><span class="n">train_state_</span><span class="o">.</span><span class="n">actor_params</span><span class="p">,</span>
+                    <span class="n">input_ids</span><span class="o">=</span><span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span>
+                        <span class="n">input_ids_</span><span class="p">,</span> <span class="s1">&#39;n -&gt; 1 n&#39;</span>
+                    <span class="p">),</span>
+                    <span class="n">attention_mask_</span><span class="o">=</span><span class="n">attention_mask_</span><span class="p">,</span>
+                    <span class="n">max_sequence_length</span><span class="o">=</span><span class="n">max_sequence_length</span><span class="p">,</span>
+                    <span class="n">eos_token</span><span class="o">=</span><span class="n">eos_token</span><span class="p">,</span>
+                    <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+                    <span class="n">return_values</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">action_logits_</span> <span class="o">=</span> <span class="n">shift</span><span class="p">(</span><span class="n">action_logits_</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">action_probs_</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">action_logits_</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">action_len_</span> <span class="o">=</span> <span class="n">action_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">action_log_prob_</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">(</span><span class="n">action_probs_</span><span class="p">,</span> <span class="n">sequence_</span><span class="p">)</span>
+                <span class="n">action_log_prob_</span> <span class="o">=</span> <span class="n">action_log_prob_</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len_</span><span class="p">:]</span>
+                <span class="n">action_</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">action_</span><span class="p">,</span> <span class="s1">&#39;1 ... -&gt; ...&#39;</span><span class="p">)</span>
+                <span class="n">sequence_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">input_ids_</span><span class="p">,</span> <span class="n">action_</span>
+                    <span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+                <span class="p">)</span>
+                <span class="n">prompt_length_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids_</span><span class="p">)</span>
+                <span class="n">prompt_mask_</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sequence_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">prompt_length_</span>
+
+                <span class="n">sequence_</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">sequence_</span><span class="p">,</span> <span class="s1">&#39;n -&gt; 1 n&#39;</span><span class="p">)</span>
+                <span class="n">prompt_mask_</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">prompt_mask_</span><span class="p">,</span> <span class="s1">&#39;n -&gt; 1 n&#39;</span><span class="p">)</span>
+
+                <span class="n">reward_</span> <span class="o">=</span> <span class="n">train_state_</span><span class="o">.</span><span class="n">apply_fn_reward</span><span class="p">(</span>
+                    <span class="n">train_state_</span><span class="o">.</span><span class="n">reward_params</span><span class="p">,</span>
+                    <span class="n">sequence_</span><span class="p">,</span>
+                    <span class="n">prompt_mask</span><span class="o">=</span><span class="n">prompt_mask_</span><span class="p">,</span>
+                    <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask_</span><span class="p">,</span>
+                    <span class="n">sample</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="p">(</span>
+                    <span class="n">sequence_</span><span class="p">,</span>
+                    <span class="n">prompt_mask_</span><span class="p">,</span>
+                    <span class="n">attention_mask_</span><span class="p">,</span>
+                    <span class="n">action_probs_</span><span class="p">,</span>
+                    <span class="n">action_log_prob_</span><span class="p">,</span>
+                    <span class="n">reward_</span><span class="p">,</span>
+                    <span class="n">value_</span>
+                <span class="p">)</span>
+
+            <span class="n">sharded_step</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span>
+                <span class="n">train_state_</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span>
+                <span class="n">input_ids_</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+                <span class="n">attention_mask_</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">rearrange_</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s1">&#39;1 ... -&gt; ...&#39;</span><span class="p">)</span>
+            <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">iterable</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">num_episodes</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Episode&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">time_step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_time_steps</span><span class="p">):</span>
+                    <span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">get_rand</span><span class="p">()</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">-</span> <span class="n">max_batch_size</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="n">max_batch_size</span> <span class="k">else</span> <span class="n">index</span>
+                    <span class="n">input_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">:</span><span class="n">index</span> <span class="o">+</span> <span class="n">max_batch_size</span><span class="p">][</span><span class="s1">&#39;input_ids&#39;</span><span class="p">]</span>
+                    <span class="n">attention_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">index</span><span class="p">:</span><span class="n">index</span> <span class="o">+</span> <span class="n">max_batch_size</span><span class="p">][</span><span class="s1">&#39;attention_mask&#39;</span><span class="p">]</span>
+
+                    <span class="p">(</span>
+                        <span class="n">sequence</span><span class="p">,</span>
+                        <span class="n">prompt_mask</span><span class="p">,</span>
+                        <span class="n">attention_mask</span><span class="p">,</span>
+                        <span class="n">action_probs</span><span class="p">,</span>
+                        <span class="n">action_log_prob</span><span class="p">,</span>
+                        <span class="n">reward</span><span class="p">,</span>
+                        <span class="n">value</span>
+                    <span class="p">)</span> <span class="o">=</span> <span class="n">sharded_step</span><span class="p">(</span>
+                        <span class="n">train_state</span><span class="p">,</span>
+                        <span class="n">input_ids</span><span class="p">,</span>
+                        <span class="n">attention_mask</span>
+                    <span class="p">)</span>
+                    <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span>
+                        <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">max_time_steps</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+                    <span class="n">memories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Memory</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">rearrange_</span><span class="p">,</span> <span class="p">(</span>
+                        <span class="n">sequence</span><span class="p">,</span>
+                        <span class="n">prompt_mask</span><span class="p">,</span>
+                        <span class="n">attention_mask</span><span class="p">,</span>
+                        <span class="n">action_probs</span><span class="p">,</span>
+                        <span class="n">action_log_prob</span><span class="p">,</span>
+                        <span class="n">reward</span><span class="p">,</span>
+                        <span class="n">value</span>
+                    <span class="p">))))</span>
+
+                    <span class="c1"># learn from the stored memories</span>
+
+                    <span class="k">if</span> <span class="n">time</span> <span class="o">%</span> <span class="n">update_time_steps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">train_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span>
+                            <span class="n">memories</span><span class="p">,</span>
+                            <span class="n">train_state</span><span class="o">=</span><span class="n">train_state</span>
+                        <span class="p">)</span>
+                        <span class="n">memories</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">train_state</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.rlhf.trainer.RLHFTrainer.learn" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">learn</span><span class="p">(</span><span class="n">memory</span><span class="p">,</span> <span class="n">train_state</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Memory Must be Deque of all prevision memories
+train_state : TrainStateRLHF Type</p>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/rlhf/trainer.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span>
+<span class="normal">616</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span>
+<span class="normal">652</span>
+<span class="normal">653</span>
+<span class="normal">654</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span>
+<span class="normal">660</span>
+<span class="normal">661</span>
+<span class="normal">662</span>
+<span class="normal">663</span>
+<span class="normal">664</span>
+<span class="normal">665</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span>
+<span class="normal">670</span>
+<span class="normal">671</span>
+<span class="normal">672</span>
+<span class="normal">673</span>
+<span class="normal">674</span>
+<span class="normal">675</span>
+<span class="normal">676</span>
+<span class="normal">677</span>
+<span class="normal">678</span>
+<span class="normal">679</span>
+<span class="normal">680</span>
+<span class="normal">681</span>
+<span class="normal">682</span>
+<span class="normal">683</span>
+<span class="normal">684</span>
+<span class="normal">685</span>
+<span class="normal">686</span>
+<span class="normal">687</span>
+<span class="normal">688</span>
+<span class="normal">689</span>
+<span class="normal">690</span>
+<span class="normal">691</span>
+<span class="normal">692</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">learn</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">memory</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Deque</span><span class="p">[</span><span class="n">Memory</span><span class="p">],</span>
+        <span class="n">train_state</span><span class="p">:</span> <span class="n">TrainStateRLHF</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Memory Must be Deque of all prevision memories</span>
+<span class="sd">    train_state : TrainStateRLHF Type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">memory_dataloader</span> <span class="o">=</span> <span class="n">create_dataloader</span><span class="p">(</span>
+        <span class="n">memory</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">minibatch_size</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span>
+            <span class="n">train_state</span><span class="p">:</span> <span class="n">TrainStateRLHF</span><span class="p">,</span>
+            <span class="n">input_ids</span><span class="p">,</span>
+            <span class="n">pm</span><span class="p">,</span>
+            <span class="n">rewards</span><span class="p">,</span>
+            <span class="n">old_values</span><span class="p">,</span>
+            <span class="n">attention_mask</span><span class="p">,</span>
+            <span class="n">old_action_probs</span><span class="p">,</span>
+            <span class="n">old_log_probs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">def</span> <span class="nf">calculate_loss</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+            <span class="k">global</span> <span class="n">rewards</span>
+            <span class="k">global</span> <span class="n">old_values</span>
+
+            <span class="n">action_masks</span> <span class="o">=</span> <span class="o">~</span><span class="n">pm</span> <span class="o">&amp;</span> <span class="n">attention_mask</span>
+            <span class="n">action_logits</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">apply_fn_actor</span><span class="p">(</span>
+                <span class="n">params</span><span class="p">[</span><span class="s2">&quot;params&quot;</span><span class="p">],</span>
+                <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+                <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span>
+            <span class="p">)</span>
+            <span class="n">action_logits</span> <span class="o">=</span> <span class="n">shift</span><span class="p">(</span><span class="n">action_logits</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">action_len</span> <span class="o">=</span> <span class="n">old_log_probs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">action_probs</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">action_logits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">action_log_probs</span> <span class="o">=</span> <span class="n">log_prob</span><span class="p">(</span><span class="n">action_probs</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">)</span>
+            <span class="n">action_log_probs</span> <span class="o">=</span> <span class="n">action_log_probs</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+            <span class="n">entropies</span> <span class="o">=</span> <span class="n">masked_entropy</span><span class="p">(</span><span class="n">action_probs</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">action_masks</span><span class="p">)</span>
+            <span class="n">kl_penalty</span> <span class="o">=</span> <span class="n">masked_mean</span><span class="p">(</span>
+                <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">old_action_probs</span> <span class="o">*</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">old_action_probs</span><span class="p">)</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">action_probs</span><span class="p">))),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+                <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span>
+            <span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">kl_div_loss_weight</span>
+
+            <span class="n">rewards</span> <span class="o">=</span> <span class="n">rewards</span> <span class="o">-</span> <span class="n">kl_penalty</span>
+            <span class="n">normalize_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">old_values</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">old_values</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">shift</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">old_values</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+
+                <span class="n">old_values</span> <span class="o">=</span> <span class="n">old_values</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:]</span>
+                <span class="n">rewards</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">rewards</span><span class="p">,</span> <span class="s1">&#39;b -&gt; b 1&#39;</span><span class="p">)</span>
+                <span class="n">normalize_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="n">action_masks</span><span class="p">[:,</span> <span class="o">-</span><span class="n">action_len</span><span class="p">:])</span>
+
+            <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;</span> <span class="n">rewards</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;... -&gt; ... 1&#39;</span><span class="p">)</span>
+
+            <span class="n">ratios</span> <span class="o">=</span> <span class="p">(</span><span class="n">action_log_probs</span> <span class="o">-</span> <span class="n">old_log_probs</span><span class="p">)</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span>
+            <span class="n">advantages</span> <span class="o">=</span> <span class="n">masked_normalize</span><span class="p">(</span><span class="n">rewards</span> <span class="o">-</span> <span class="n">old_values</span><span class="p">,</span> <span class="o">**</span><span class="n">normalize_kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">advantages</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">advantages</span> <span class="o">=</span> <span class="n">einops</span><span class="o">.</span><span class="n">rearrange</span><span class="p">(</span><span class="n">advantages</span><span class="p">,</span> <span class="s1">&#39;b -&gt; b 1&#39;</span><span class="p">)</span>
+
+            <span class="n">surr1</span> <span class="o">=</span> <span class="n">ratios</span> <span class="o">*</span> <span class="n">advantages</span>
+            <span class="n">surr2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">ratios</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eps_clip</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eps_clip</span><span class="p">)</span>
+            <span class="n">policy_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">surr1</span><span class="p">,</span> <span class="n">surr2</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">beta_s</span> <span class="o">*</span> <span class="n">entropies</span>  <span class="c1"># Policy Loss</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">policy_loss</span><span class="p">)</span>  <span class="c1"># Loss</span>
+
+            <span class="n">value_loss</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                <span class="n">clipped_value_loss</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">old_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">value_clip</span><span class="p">))</span>  <span class="c1"># VLoss</span>
+            <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">value_loss</span>  <span class="c1"># I need gradient for these two losses</span>
+
+        <span class="n">grad</span><span class="p">,</span> <span class="p">(</span><span class="n">loss_</span><span class="p">,</span> <span class="n">value_loss_</span><span class="p">)</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">value_and_grad</span><span class="p">(</span><span class="n">calculate_loss</span><span class="p">)(</span><span class="n">train_state</span><span class="o">.</span><span class="n">actor_params</span><span class="p">)</span>
+        <span class="n">train_state</span> <span class="o">=</span> <span class="n">train_state</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span>
+            <span class="n">grad_actor</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span>  <span class="c1"># Based on Loss</span>
+            <span class="n">grads_critic</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">value_loss_</span><span class="p">)(</span><span class="n">train_state</span><span class="o">.</span><span class="n">critic_params</span><span class="p">)</span>  <span class="c1"># Based on Value Loss</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">train_state</span><span class="p">,</span> <span class="p">(</span><span class="n">loss_</span><span class="p">,</span> <span class="n">value_loss_</span><span class="p">)</span>
+
+    <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">autonotebook</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">total</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">epochs</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory_dataloader</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">track_memory</span><span class="p">:</span>
+        <span class="n">mem_res</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">get_mem</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mem_res</span> <span class="o">=</span> <span class="s1">&#39;Tracking Option is OFF&#39;</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">epochs</span>
+    <span class="p">):</span>
+        <span class="k">for</span> <span class="p">(</span>
+                <span class="n">input_ids_</span><span class="p">,</span>
+                <span class="n">pm_</span><span class="p">,</span>
+                <span class="n">attention_mask_</span><span class="p">,</span>
+                <span class="n">old_action_probs_</span><span class="p">,</span>
+                <span class="n">old_log_probs_</span><span class="p">,</span>
+                <span class="n">rewards_</span><span class="p">,</span>
+                <span class="n">old_values_</span>
+        <span class="p">)</span> <span class="ow">in</span> <span class="n">memory_dataloader</span><span class="p">:</span>
+            <span class="n">train_state</span><span class="p">,</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span>
+                <span class="n">train_state</span><span class="o">=</span><span class="n">train_state</span><span class="p">,</span>
+                <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask_</span><span class="p">,</span>
+                <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids_</span><span class="p">,</span>
+                <span class="n">pm</span><span class="o">=</span><span class="n">pm_</span><span class="p">,</span>
+                <span class="n">rewards</span><span class="o">=</span><span class="n">rewards_</span><span class="p">,</span>
+                <span class="n">old_values</span><span class="o">=</span><span class="n">old_values_</span><span class="p">,</span>
+                <span class="n">old_log_probs</span><span class="o">=</span><span class="n">old_log_probs_</span><span class="p">,</span>
+                <span class="n">old_action_probs</span><span class="o">=</span><span class="n">old_action_probs_</span>
+            <span class="p">)</span>
+
+            <span class="n">pbar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span>
+                <span class="n">loss</span><span class="o">=</span><span class="n">loss</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">track_memory</span><span class="p">:</span>
+                <span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">pbar</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">mem_res</span><span class="p">)</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_state</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Erfan Zare Chavoshi-EasyDel
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>

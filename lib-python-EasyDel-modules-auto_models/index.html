@@ -1,0 +1,3110 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Erfan Zare Chavoshi">
+      
+      
+      
+        <link rel="prev" href="../lib-python-EasyDel-modules-mistral-modelling_mistral_flax/">
+      
+      
+        <link rel="next" href="../lib-python-EasyDel-modules-lucid_transformer-modelling_lt_flax/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>auto_models - EasyDel</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#modulesauto_models" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EasyDel" class="md-header__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EasyDel
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              auto_models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EasyDel" class="md-nav__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EasyDel
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AvailableModels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AvailableModels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EasyBIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Eval
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Eval
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-eval-lm_eval/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lm_eval
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Transform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Transform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-easydel_transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    easydel_transform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mpt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mpt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-smi-smi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    smi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Serve
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Serve
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-torch_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    torch_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-jax_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jax_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-falcon-modelling_falcon_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-palm-modelling_palm_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Palm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-flax_modelling_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    flax_modelling_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_neo_x-modelling_gpt_neo_x_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-Neox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_j-modelling_gpt_j_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-J
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mistral-modelling_mistral_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    auto_models
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    auto_models
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models" class="md-nav__link">
+    <span class="md-ellipsis">
+      auto_models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoEasyDelModelForCausalLM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AutoEasyDelModelForCausalLM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM.from_pretrained" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_pretrained()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.get_modules_by_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_modules_by_type()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.is_flatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      is_flatten()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-lucid_transformer-modelling_lt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LucidTransformers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-opt-modelling_opt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mosaic_mpt-modelling_mpt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-llama-modelling_llama_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-t5-modelling_t5_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    T5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-configs-configs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    configs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-tensor_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tensor_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-prompters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    prompters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-checker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RLHF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            RLHF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-trainer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    trainer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-reward/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    reward
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-ppo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ppo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-fsdp_train/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    fsdp_train
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-tf_dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tf_dataset
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-training_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    training_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linen
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Linen
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RL Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            RL Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_base.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_value_head.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_value_head
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-core.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data Preprocessing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Data Preprocessing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-data_preprocessing-_processor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    data_preprocessing/_processor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorchServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PytorchServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JAXServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JAXServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataProcessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataProcessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TrainingExample/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TrainingExample
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama2 Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MosaicMPT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MosaicMPT Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models" class="md-nav__link">
+    <span class="md-ellipsis">
+      auto_models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM" class="md-nav__link">
+    <span class="md-ellipsis">
+      AutoEasyDelModelForCausalLM
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AutoEasyDelModelForCausalLM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM.from_pretrained" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_pretrained()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.get_modules_by_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_modules_by_type()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.modules.auto_models.is_flatten" class="md-nav__link">
+    <span class="md-ellipsis">
+      is_flatten()
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="modulesauto_models">modules.auto_models</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="lib.python.EasyDel.modules.auto_models"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM" class="doc doc-heading">
+          <code>AutoEasyDelModelForCausalLM</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+
+
+            <details class="quote">
+              <summary>Source code in <code>lib/python/EasyDel/modules/auto_models.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">AutoEasyDelModelForCausalLM</span><span class="p">:</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_pretrained</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">device</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="n">param_dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="n">precision</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">Precision</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">Precision</span><span class="p">(</span><span class="s1">&#39;fastest&#39;</span><span class="p">),</span>
+            <span class="n">sharding_axis_dims</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">sharding_axis_names</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">),</span>
+            <span class="n">q_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">k_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">v_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">b_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">(</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">a_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">input_shape</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">backend</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">FlaxPreTrainedModel</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The from_pretrained function is a helper function that allows you to instantiate a model from the pretrained</span>
+<span class="sd">        model repository. It takes as input the name of the model (e.g., &#39;bert-base-uncased&#39;) and returns an instance of</span>
+<span class="sd">        the class corresponding to your model, with all weights loaded from disk.</span>
+
+<span class="sd">        :param cls: Create an instance of the class that called this function</span>
+<span class="sd">        :param repo_id: str: Identify the model in the huggingface model hub</span>
+<span class="sd">        :param device: Specify the device on which to run the model</span>
+<span class="sd">        :param dtype: jax.numpy.dtype: Specify the data type of the model</span>
+<span class="sd">        :param param_dtype: jax.numpy.dtype: Specify the dtype of the parameters</span>
+<span class="sd">        :param precision: jax.lax.Precision: Control the precision of the model</span>
+<span class="sd">        :param sharding_axis_dims: typing.Sequence[int]: Specify the dimension of each axis in the sharded model</span>
+<span class="sd">        :param sharding_axis_names: typing.Sequence[str]: Specify the order of sharding</span>
+<span class="sd">        :param q_ps: jax.sharding.PartitionSpec: Specify the partitioning of the query tensor</span>
+<span class="sd">        :param k_ps: jax.sharding.PartitionSpec: Partition the key matrix</span>
+<span class="sd">        :param v_ps: jax.sharding.PartitionSpec: Specify the partitioning of the value tensor</span>
+<span class="sd">        :param b_ps: jax.sharding.PartitionSpec: Specify the Attention Bias partition spec</span>
+<span class="sd">        :param a_ps: jax.sharding.PartitionSpec: Specify the partitioning of the attention weights</span>
+<span class="sd">        :param input_shape: typing.Sequence[int]: Specify the shape of the input to the model</span>
+<span class="sd">        :param backend: typing.Optional[str]: backend to use for model</span>
+<span class="sd">        :param **kwargs: Pass additional arguments to the model and config classes</span>
+<span class="sd">        :return: A model and parameters</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+        <span class="n">model_type</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_type</span>
+
+        <span class="n">cfg</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">trf</span> <span class="o">=</span> <span class="n">get_modules_by_type</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">cfg</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s1">&#39;add_jax_args&#39;</span><span class="p">):</span>
+            <span class="n">cfg</span><span class="o">.</span><span class="n">add_jax_args</span><span class="p">()</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">axis_dims</span> <span class="o">=</span> <span class="n">sharding_axis_dims</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">axis_names</span> <span class="o">=</span> <span class="n">sharding_axis_names</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">q_ps</span> <span class="o">=</span> <span class="n">q_ps</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">k_ps</span> <span class="o">=</span> <span class="n">k_ps</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">v_ps</span> <span class="o">=</span> <span class="n">v_ps</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">b_ps</span> <span class="o">=</span> <span class="n">b_ps</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">a_ps</span> <span class="o">=</span> <span class="n">a_ps</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
+        <span class="n">ed_model</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">cfg</span><span class="p">,</span>
+            <span class="n">_do_init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="n">param_dtype</span><span class="o">=</span><span class="n">param_dtype</span><span class="p">,</span>
+            <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
+            <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span>
+        <span class="p">)</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="n">trf</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">model</span><span class="p">,</span>
+        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_flatten</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="n">unflatten_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ed_model</span><span class="p">,</span> <span class="n">params</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.modules.auto_models.AutoEasyDelModelForCausalLM.from_pretrained" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">param_dtype</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">Precision</span><span class="p">(</span><span class="s1">&#39;fastest&#39;</span><span class="p">),</span> <span class="n">sharding_axis_dims</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">sharding_axis_names</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">),</span> <span class="n">q_ps</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">),</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">k_ps</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">),</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">v_ps</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">),</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">b_ps</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">),</span> <span class="kc">None</span><span class="p">),</span> <span class="n">a_ps</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">),</span> <span class="s1">&#39;mp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">backend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The from_pretrained function is a helper function that allows you to instantiate a model from the pretrained
+model repository. It takes as input the name of the model (e.g., 'bert-base-uncased') and returns an instance of
+the class corresponding to your model, with all weights loaded from disk.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>cls</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Create an instance of the class that called this function</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>repo_id</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>str: Identify the model in the huggingface model hub</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>device</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify the device on which to run the model</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.devices">devices</span>(&#39;cpu&#39;)[0]</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>dtype</code></td>
+          <td>
+                <code><span title="jax.numpy.dtype">dtype</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.numpy.dtype: Specify the data type of the model</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.numpy.float32">float32</span></code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>param_dtype</code></td>
+          <td>
+                <code><span title="jax.numpy.dtype">dtype</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.numpy.dtype: Specify the dtype of the parameters</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.numpy.float32">float32</span></code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>precision</code></td>
+          <td>
+                <code><span title="jax.lax.Precision">Precision</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.lax.Precision: Control the precision of the model</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.lax.Precision">Precision</span>(&#39;fastest&#39;)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sharding_axis_dims</code></td>
+          <td>
+                <code><span title="typing.Sequence">Sequence</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>typing.Sequence[int]: Specify the dimension of each axis in the sharded model</p>
+            </div>
+          </td>
+          <td>
+                <code>(1, -1, 1, 1)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sharding_axis_names</code></td>
+          <td>
+                <code><span title="typing.Sequence">Sequence</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>typing.Sequence[str]: Specify the order of sharding</p>
+            </div>
+          </td>
+          <td>
+                <code>(&#39;dp&#39;, &#39;fsdp&#39;, &#39;tp&#39;, &#39;mp&#39;)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>q_ps</code></td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.sharding.PartitionSpec: Specify the partitioning of the query tensor</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span>((&#39;dp&#39;, &#39;fsdp&#39;), &#39;mp&#39;, &#39;tp&#39;, None)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>k_ps</code></td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.sharding.PartitionSpec: Partition the key matrix</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span>((&#39;dp&#39;, &#39;fsdp&#39;), &#39;mp&#39;, &#39;tp&#39;, None)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>v_ps</code></td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.sharding.PartitionSpec: Specify the partitioning of the value tensor</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span>((&#39;dp&#39;, &#39;fsdp&#39;), &#39;mp&#39;, &#39;tp&#39;, None)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>b_ps</code></td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.sharding.PartitionSpec: Specify the Attention Bias partition spec</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span>(&#39;dp&#39;, None, (&#39;dp&#39;, &#39;fsdp&#39;), None)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>a_ps</code></td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>jax.sharding.PartitionSpec: Specify the partitioning of the attention weights</p>
+            </div>
+          </td>
+          <td>
+                <code><span title="jax.sharding.PartitionSpec">PartitionSpec</span>((&#39;dp&#39;, &#39;fsdp&#39;), &#39;mp&#39;, &#39;tp&#39;, None)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>input_shape</code></td>
+          <td>
+                <code><span title="typing.Sequence">Sequence</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>typing.Sequence[int]: Specify the shape of the input to the model</p>
+            </div>
+          </td>
+          <td>
+                <code>(1, 1)</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>backend</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>typing.Optional[str]: backend to use for model</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Pass additional arguments to the model and config classes</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="transformers.FlaxPreTrainedModel">FlaxPreTrainedModel</span>, dict]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A model and parameters</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/modules/auto_models.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_pretrained</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">repo_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">param_dtype</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+        <span class="n">precision</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">Precision</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">Precision</span><span class="p">(</span><span class="s1">&#39;fastest&#39;</span><span class="p">),</span>
+        <span class="n">sharding_axis_dims</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">sharding_axis_names</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;dp&#39;</span><span class="p">,</span> <span class="s1">&#39;fsdp&#39;</span><span class="p">,</span> <span class="s1">&#39;tp&#39;</span><span class="p">,</span> <span class="s1">&#39;mp&#39;</span><span class="p">),</span>
+        <span class="n">q_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">k_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">v_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">b_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">(</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">a_ps</span><span class="p">:</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">sharding</span><span class="o">.</span><span class="n">PartitionSpec</span><span class="p">((</span><span class="s2">&quot;dp&quot;</span><span class="p">,</span> <span class="s2">&quot;fsdp&quot;</span><span class="p">),</span> <span class="s2">&quot;mp&quot;</span><span class="p">,</span> <span class="s2">&quot;tp&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="n">input_shape</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">backend</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">FlaxPreTrainedModel</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The from_pretrained function is a helper function that allows you to instantiate a model from the pretrained</span>
+<span class="sd">    model repository. It takes as input the name of the model (e.g., &#39;bert-base-uncased&#39;) and returns an instance of</span>
+<span class="sd">    the class corresponding to your model, with all weights loaded from disk.</span>
+
+<span class="sd">    :param cls: Create an instance of the class that called this function</span>
+<span class="sd">    :param repo_id: str: Identify the model in the huggingface model hub</span>
+<span class="sd">    :param device: Specify the device on which to run the model</span>
+<span class="sd">    :param dtype: jax.numpy.dtype: Specify the data type of the model</span>
+<span class="sd">    :param param_dtype: jax.numpy.dtype: Specify the dtype of the parameters</span>
+<span class="sd">    :param precision: jax.lax.Precision: Control the precision of the model</span>
+<span class="sd">    :param sharding_axis_dims: typing.Sequence[int]: Specify the dimension of each axis in the sharded model</span>
+<span class="sd">    :param sharding_axis_names: typing.Sequence[str]: Specify the order of sharding</span>
+<span class="sd">    :param q_ps: jax.sharding.PartitionSpec: Specify the partitioning of the query tensor</span>
+<span class="sd">    :param k_ps: jax.sharding.PartitionSpec: Partition the key matrix</span>
+<span class="sd">    :param v_ps: jax.sharding.PartitionSpec: Specify the partitioning of the value tensor</span>
+<span class="sd">    :param b_ps: jax.sharding.PartitionSpec: Specify the Attention Bias partition spec</span>
+<span class="sd">    :param a_ps: jax.sharding.PartitionSpec: Specify the partitioning of the attention weights</span>
+<span class="sd">    :param input_shape: typing.Sequence[int]: Specify the shape of the input to the model</span>
+<span class="sd">    :param backend: typing.Optional[str]: backend to use for model</span>
+<span class="sd">    :param **kwargs: Pass additional arguments to the model and config classes</span>
+<span class="sd">    :return: A model and parameters</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+    <span class="n">model_type</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_type</span>
+
+    <span class="n">cfg</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">trf</span> <span class="o">=</span> <span class="n">get_modules_by_type</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">repo_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="s1">&#39;add_jax_args&#39;</span><span class="p">):</span>
+        <span class="n">cfg</span><span class="o">.</span><span class="n">add_jax_args</span><span class="p">()</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">axis_dims</span> <span class="o">=</span> <span class="n">sharding_axis_dims</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">axis_names</span> <span class="o">=</span> <span class="n">sharding_axis_names</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">q_ps</span> <span class="o">=</span> <span class="n">q_ps</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">k_ps</span> <span class="o">=</span> <span class="n">k_ps</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">v_ps</span> <span class="o">=</span> <span class="n">v_ps</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">b_ps</span> <span class="o">=</span> <span class="n">b_ps</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">a_ps</span> <span class="o">=</span> <span class="n">a_ps</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span>
+    <span class="n">ed_model</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span>
+        <span class="n">config</span><span class="o">=</span><span class="n">cfg</span><span class="p">,</span>
+        <span class="n">_do_init</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+        <span class="n">param_dtype</span><span class="o">=</span><span class="n">param_dtype</span><span class="p">,</span>
+        <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">,</span>
+        <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span>
+    <span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">=</span> <span class="n">trf</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">model</span><span class="p">,</span>
+    <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">is_flatten</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">unflatten_dict</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ed_model</span><span class="p">,</span> <span class="n">params</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="lib.python.EasyDel.modules.auto_models.get_modules_by_type" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">get_modules_by_type</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The get_modules_by_type function is a helper function that returns the following:
+    1. The config class for the model type specified (e.g., LlamaConfig, FalconConfig)
+    2. The Flax Model class for the model type specified (e.g., FlaxLlamaForCausalLM, FlaxFalconForCausalLM)
+    3. A function to convert a HuggingFace pretrained checkpoint into an EasyDel checkpoint</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>model_type</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>str: Determine which model to use</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A tuple of three elements (BaseConfig,BaseModel,Func To Transform Model from Torch to EasyDeL)</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/modules/auto_models.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_modules_by_type</span><span class="p">(</span><span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The get_modules_by_type function is a helper function that returns the following:</span>
+<span class="sd">        1. The config class for the model type specified (e.g., LlamaConfig, FalconConfig)</span>
+<span class="sd">        2. The Flax Model class for the model type specified (e.g., FlaxLlamaForCausalLM, FlaxFalconForCausalLM)</span>
+<span class="sd">        3. A function to convert a HuggingFace pretrained checkpoint into an EasyDel checkpoint</span>
+
+<span class="sd">    :param model_type: str: Determine which model to use</span>
+<span class="sd">    :return: A tuple of three elements (BaseConfig,BaseModel,Func To Transform Model from Torch to EasyDeL)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;llama&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.llama</span> <span class="kn">import</span> <span class="n">LlamaConfig</span> <span class="k">as</span> <span class="n">_LlamaConfig</span>
+        <span class="kn">from</span> <span class="nn">.llama</span> <span class="kn">import</span> <span class="n">FlaxLlamaForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxLlamaForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">..transform</span> <span class="kn">import</span> <span class="n">llama_convert_hf_to_flax</span> <span class="k">as</span> <span class="n">_llama_convert_hf_to_flax</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_LlamaConfig</span><span class="p">,</span>
+            <span class="n">_FlaxLlamaForCausalLM</span><span class="p">,</span>
+            <span class="n">_llama_convert_hf_to_flax</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;falcon&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.falcon</span> <span class="kn">import</span> <span class="n">FlaxFalconForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxFalconForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.falcon</span> <span class="kn">import</span> <span class="n">FalconConfig</span> <span class="k">as</span> <span class="n">_FalconConfig</span>
+        <span class="kn">from</span> <span class="nn">..transform</span> <span class="kn">import</span> <span class="n">falcon_convert_hf_to_flax</span> <span class="k">as</span> <span class="n">_falcon_convert_pt_to_flax</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_FalconConfig</span><span class="p">,</span>
+            <span class="n">_FlaxFalconForCausalLM</span><span class="p">,</span>
+            <span class="n">_falcon_convert_pt_to_flax</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;mpt&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.mosaic_mpt</span> <span class="kn">import</span> <span class="n">FlaxMptForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxMptForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.mosaic_mpt</span> <span class="kn">import</span> <span class="n">MptConfig</span> <span class="k">as</span> <span class="n">_MptConfig</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_MptConfig</span><span class="p">,</span>
+            <span class="n">_FlaxMptForCausalLM</span><span class="p">,</span>
+            <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">huggingface_to_easydel</span><span class="p">,</span> <span class="n">embedding_layer_name</span><span class="o">=</span><span class="s2">&quot;wte&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;mistral&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.mistral</span> <span class="kn">import</span> <span class="n">FlaxMistralForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxMistralForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.mistral</span> <span class="kn">import</span> <span class="n">MistralConfig</span> <span class="k">as</span> <span class="n">_MistralConfig</span>
+        <span class="kn">from</span> <span class="nn">..transform</span> <span class="kn">import</span> <span class="n">mistral_convert_hf_to_flax</span> <span class="k">as</span> <span class="n">_mistral_convert_hf_to_flax</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_MistralConfig</span><span class="p">,</span>
+            <span class="n">_FlaxMistralForCausalLM</span><span class="p">,</span>
+            <span class="n">_mistral_convert_hf_to_flax</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;gptj&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.gpt_j</span> <span class="kn">import</span> <span class="n">FlaxGPTJForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxGPTJForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.gpt_j</span> <span class="kn">import</span> <span class="n">GPTJConfig</span> <span class="k">as</span> <span class="n">_GPTJConfig</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_GPTJConfig</span><span class="p">,</span>
+            <span class="n">_FlaxGPTJForCausalLM</span><span class="p">,</span>
+            <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">huggingface_to_easydel</span><span class="p">,</span> <span class="n">embedding_layer_name</span><span class="o">=</span><span class="s2">&quot;wte&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;gpt_neox&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.gpt_neo_x</span> <span class="kn">import</span> <span class="n">FlaxGPTNeoXForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxGPTNeoXForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.gpt_neo_x</span> <span class="kn">import</span> <span class="n">GPTNeoXConfig</span> <span class="k">as</span> <span class="n">_GPTNeoXConfig</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_GPTNeoXConfig</span><span class="p">,</span>
+            <span class="n">_FlaxGPTNeoXForCausalLM</span><span class="p">,</span>
+            <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">huggingface_to_easydel</span><span class="p">,</span> <span class="n">embedding_layer_name</span><span class="o">=</span><span class="s2">&quot;wte&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;palm&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.palm</span> <span class="kn">import</span> <span class="n">FlaxPalmForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxPalmForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.palm</span> <span class="kn">import</span> <span class="n">PalmConfig</span> <span class="k">as</span> <span class="n">_PalmConfig</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_PalmConfig</span><span class="p">,</span>
+            <span class="n">_FlaxPalmForCausalLM</span><span class="p">,</span>
+            <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">huggingface_to_easydel</span><span class="p">,</span> <span class="n">embedding_layer_name</span><span class="o">=</span><span class="s2">&quot;wte&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;lt&quot;</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">.lucid_transformer</span> <span class="kn">import</span> <span class="n">FlaxLTForCausalLM</span> <span class="k">as</span> <span class="n">_FlaxLTForCausalLM</span>
+        <span class="kn">from</span> <span class="nn">.lucid_transformer</span> <span class="kn">import</span> <span class="n">FlaxLTConfig</span> <span class="k">as</span> <span class="n">_FlaxLTConfig</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">_FlaxLTConfig</span><span class="p">,</span>
+            <span class="n">_FlaxLTForCausalLM</span><span class="p">,</span>
+            <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">huggingface_to_easydel</span><span class="p">,</span> <span class="n">embedding_layer_name</span><span class="o">=</span><span class="s2">&quot;wte&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">EasyDelRunTimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Model Type (</span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s1">) is not supported or is not found&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h2 id="lib.python.EasyDel.modules.auto_models.is_flatten" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">is_flatten</span><span class="p">(</span><span class="n">pytree</span><span class="p">)</span></code>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The is_flatten function checks if the pytree is flattened.
+    If it is, then the first key in the dictionary will be a tuple of (mpl, mpl_id).
+    Otherwise, it will be an integer representing mpl_id.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>pytree</code></td>
+          <td>
+                <code>dict</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>dict: Pass the pytree to the function</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>True if the pytree is a flattened tree, and false otherwise</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/modules/auto_models.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_flatten</span><span class="p">(</span><span class="n">pytree</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The is_flatten function checks if the pytree is flattened.</span>
+<span class="sd">        If it is, then the first key in the dictionary will be a tuple of (mpl, mpl_id).</span>
+<span class="sd">        Otherwise, it will be an integer representing mpl_id.</span>
+
+<span class="sd">    :param pytree: dict: Pass the pytree to the function</span>
+<span class="sd">    :return: True if the pytree is a flattened tree, and false otherwise</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mpl</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">pytree</span><span class="o">.</span><span class="n">keys</span><span class="p">()][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mpl</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Erfan Zare Chavoshi-EasyDel
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>

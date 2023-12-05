@@ -1,0 +1,3380 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Erfan Zare Chavoshi">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.14">
+    
+    
+      
+        <title>rl_trainer.models.modelling_base - EasyDel</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#rl_trainermodelsmodelling_base" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EasyDel" class="md-header__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EasyDel
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              rl_trainer.models.modelling_base
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EasyDel" class="md-nav__button md-logo" aria-label="EasyDel" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    EasyDel
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/erfanzar/EasyDel" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Install/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AvailableModels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AvailableModels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EasyBIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Eval
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Eval
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-eval-lm_eval/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lm_eval
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Transform
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Transform
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-easydel_transform/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    easydel_transform
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mpt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mpt
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-transform-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-smi-smi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    smi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Serve
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Serve
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-torch_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    torch_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-jax_serve/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    jax_serve
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-serve-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Modules
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Modules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-falcon-modelling_falcon_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-palm-modelling_palm_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Palm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-flax_modelling_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    flax_modelling_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_neo_x-modelling_gpt_neo_x_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-Neox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-gpt_j-modelling_gpt_j_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPT-J
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mistral-modelling_mistral_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-auto_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    auto_models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-lucid_transformer-modelling_lt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LucidTransformers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-opt-modelling_opt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-mosaic_mpt-modelling_mpt_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-llama-modelling_llama_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-modules-t5-modelling_t5_flax/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    T5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-configs-configs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    configs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-tensor_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tensor_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-prompters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    prompters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-utils-checker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RLHF
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            RLHF
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-trainer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    trainer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-reward/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    reward
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-ppo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ppo
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rlhf-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-fsdp_train/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    fsdp_train
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    config
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-tf_dataset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tf_dataset
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-trainer-training_utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    training_utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Linen
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Linen
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-bits/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    bits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-linen-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    RL Trainer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            RL Trainer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_base.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_base
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-models-modelling_value_head.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    models/modelling_value_head
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-rl_trainer-core.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Data Preprocessing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Data Preprocessing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lib-python-EasyDel-data_preprocessing-_processor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    data_preprocessing/_processor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorchServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PytorchServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JAXServer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JAXServer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataProcessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataProcessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TrainingExample/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TrainingExample
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Falcon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Falcon Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Llama2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Llama2 Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Mistral/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mistral Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MosaicMPT/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MosaicMPT Models
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base" class="md-nav__link">
+    <span class="md-ellipsis">
+      modelling_base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper" class="md-nav__link">
+    <span class="md-ellipsis">
+      FlaxPreTrainedModelWrapper
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FlaxPreTrainedModelWrapper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.compute_reward_score" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_reward_score()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.from_pretrained" class="md-nav__link">
+    <span class="md-ellipsis">
+      from_pretrained()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.post_init" class="md-nav__link">
+    <span class="md-ellipsis">
+      post_init()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.state_dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      state_dict()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="rl_trainermodelsmodelling_base">rl_trainer.models.modelling_base</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="lib.python.EasyDel.rl_trainer.models.modelling_base"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper" class="doc doc-heading">
+          <code>FlaxPreTrainedModelWrapper</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="flax.linen.Module">Module</span></code></p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>lib/python/EasyDel/rl_trainer/models/modelling_base.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FlaxPreTrainedModelWrapper</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="n">pretrained_model</span><span class="p">:</span> <span class="n">FlaxPreTrainedModel</span>
+    <span class="n">transformers_parent_class</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">supported_args</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">supported_modules</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;v_head&quot;</span><span class="p">,)</span>
+    <span class="n">supported_rm_modules</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,)</span>
+    <span class="n">supported_pretrained_model_architectures</span> <span class="o">=</span> <span class="n">FlaxPreTrainedModel</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_pretrained</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="n">from_pt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">model_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The from_pretrained function is used to instantiate a model from a pretrained checkpoint.</span>
+
+<span class="sd">        :param cls: Refer to the class that called this function</span>
+<span class="sd">        :param pretrained_model_name_or_path: Specify the path to the pretrained model</span>
+<span class="sd">        :param from_pt: bool: Determine whether to load the model from a pytorch checkpoint or not</span>
+<span class="sd">        :param *model_args: Pass the positional arguments of the model</span>
+<span class="sd">        :param **kwargs: Pass keyworded, variable-length argument list</span>
+<span class="sd">        :return: A model with the state_dict loaded from a file</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">reward_adapter</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;reward_adapter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">is_trainable</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;is_trainable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="n">trl_model_args</span><span class="p">,</span> <span class="n">pretrained_kwargs</span><span class="p">,</span> <span class="n">peft_quantization_kwargs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_split_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">pretrained_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">reward_adapter</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">is_trainable</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">trl_model_args</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">pretrained_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">reward_adapter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reward_adapter</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The `reward_adapter` argument should be &quot;</span>
+                <span class="s2">&quot;a string representing the name of local path or the&quot;</span>
+                <span class="s2">&quot; Hub id to the Reward Modeling adapter.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+
+            <span class="n">remote_adapter_config</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">local_adapter_present</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;adapter_config.json&quot;</span><span class="p">))</span>
+
+            <span class="n">pretrained_model</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">transformers_parent_class</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+                <span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="o">*</span><span class="n">model_args</span><span class="p">,</span> <span class="o">**</span><span class="n">pretrained_kwargs</span>
+            <span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">supported_pretrained_model_architectures</span><span class="p">):</span>
+            <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">pretrained_model_name_or_path</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;pretrained_model_name_or_path should be a string or a PreTrainedModel, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;but is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">pretrained_model</span><span class="p">,</span> <span class="o">**</span><span class="n">trl_model_args</span><span class="p">)</span>
+        <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">safe_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;model.safetensors&quot;</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;pytorch_model.bin&quot;</span><span class="p">)</span>
+
+            <span class="n">sharded_index_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;pytorch_model.bin.index.json&quot;</span><span class="p">)</span>
+            <span class="n">safe_sharded_index_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;model.safetensors.index.json&quot;</span><span class="p">)</span>
+            <span class="n">is_sharded</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">use_safe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">safe_filename</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">safe_filename</span><span class="p">)):</span>
+                <span class="n">filename</span><span class="p">,</span> <span class="n">files_to_download</span><span class="p">,</span> <span class="n">is_sharded</span><span class="p">,</span> <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_checkpoint_from_hub</span><span class="p">(</span>
+                    <span class="n">pretrained_model</span><span class="p">,</span>
+                    <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                    <span class="n">sharded_index_filename</span><span class="p">,</span>
+                    <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">files_to_download</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">safe_filename</span><span class="p">,</span> <span class="n">files_to_download</span><span class="p">,</span> <span class="n">is_sharded</span><span class="p">,</span> <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_checkpoint_from_hub</span><span class="p">(</span>
+                        <span class="n">pretrained_model</span><span class="p">,</span>
+                        <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                        <span class="n">safe_sharded_index_filename</span><span class="p">,</span>
+                        <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                        <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;model.safetensors&quot;</span><span class="p">,</span>
+                        <span class="n">model_index_name</span><span class="o">=</span><span class="s2">&quot;model.safetensors.index.json&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">use_safe</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">use_safe</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">from_pt</span><span class="p">:</span>
+                <span class="n">loading_func</span> <span class="o">=</span> <span class="n">load_file</span>
+                <span class="n">load_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">def</span> <span class="nf">loading_func</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_</span><span class="p">):</span>
+                    <span class="n">tensors</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                        <span class="n">unpacker</span> <span class="o">=</span> <span class="n">msgpack</span><span class="o">.</span><span class="n">Unpacker</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">read_size</span><span class="o">=</span><span class="mi">83886080</span><span class="p">,</span> <span class="n">max_buffer_size</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">unpacker</span><span class="p">:</span>
+                            <span class="n">key</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                            <span class="n">tensor</span> <span class="o">=</span> <span class="n">from_bytes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                            <span class="n">tensors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensor</span>
+                    <span class="k">return</span> <span class="n">tensors</span>
+
+            <span class="k">if</span> <span class="n">is_resuming_training</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">is_sharded</span><span class="p">:</span>
+                    <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+                    <span class="k">for</span> <span class="n">shard_file</span> <span class="ow">in</span> <span class="n">files_to_download</span><span class="p">:</span>
+                        <span class="n">filename</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+                            <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                            <span class="n">shard_file</span><span class="p">,</span>
+                            <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                        <span class="p">)</span>
+                        <span class="n">state_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">loading_func</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">state_dict</span> <span class="o">=</span> <span class="n">loading_func</span><span class="p">(</span><span class="n">filename</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">use_safe</span> <span class="k">else</span> <span class="n">safe_filename</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">state_dict</span> <span class="o">=</span> <span class="n">pretrained_model_name_or_path</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">from_pt</span><span class="p">:</span>
+            <span class="n">lw</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;.weight&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">default_device</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_get_current_device</span><span class="p">()):</span>
+                <span class="n">flax_dict</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">state_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">match_keywords</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;kernel&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">]):</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.weight&#39;</span><span class="p">):</span>
+                        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="p">[:</span><span class="o">-</span><span class="n">lw</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.kernel&#39;</span>
+                    <span class="n">key_tuple</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+                    <span class="n">key_names</span> <span class="o">=</span> <span class="p">()</span>
+                    <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">key_tuple</span><span class="p">:</span>
+                        <span class="n">key_names</span> <span class="o">+=</span> <span class="n">k</span><span class="p">,</span>
+                    <span class="n">flax_dict</span><span class="p">[</span><span class="n">key_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensor</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">is_peft_model</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">current_device</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_current_device</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_resuming_training</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">post_init</span><span class="p">(</span><span class="n">state_dict</span><span class="o">=</span><span class="n">state_dict</span><span class="p">)</span>
+
+        <span class="n">model</span><span class="o">.</span><span class="n">supports_rm_adapter</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">model</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_checkpoint_from_hub</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">pretrained_model</span><span class="p">,</span>
+            <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+            <span class="n">index_filename</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;pytorch_model.bin&quot;</span><span class="p">,</span>
+            <span class="n">model_index_name</span><span class="o">=</span><span class="s2">&quot;pytorch_model.bin.index.json&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The _get_checkpoint_from_hub function is used to download a pretrained model from the Hugging Face Hub.</span>
+<span class="sd">        It will first attempt to download the entire model, and if that fails it will try downloading just the v_head weights.</span>
+<span class="sd">        If neither of those attempts succeed, it will return None for all outputs.</span>
+
+<span class="sd">        :param cls: Specify the class of the model</span>
+<span class="sd">        :param pretrained_model: Load the pretrained model</span>
+<span class="sd">        :param pretrained_model_name_or_path: Load the pretrained model from a checkpoint</span>
+<span class="sd">        :param index_filename: Load the index file for sharded models</span>
+<span class="sd">        :param token: Authenticate with the hugging face model hub</span>
+<span class="sd">        :param model_name: Specify the name of the model file to be downloaded</span>
+<span class="sd">        :param model_index_name: Specify the name of the index file</span>
+<span class="sd">        :param : Load the pretrained model</span>
+<span class="sd">        :return: A tuple of four elements:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">files_to_download</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">is_sharded</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+                <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                <span class="n">model_name</span><span class="p">,</span>
+                <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="c1"># sharded</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">EntryNotFoundError</span><span class="p">,</span> <span class="n">LocalEntryNotFoundError</span><span class="p">,</span> <span class="n">HFValidationError</span><span class="p">):</span>
+            <span class="n">index_file_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">index_filename</span><span class="p">):</span>
+                <span class="n">index_file_name</span> <span class="o">=</span> <span class="n">index_filename</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">index_file_name</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+                        <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                        <span class="n">model_index_name</span><span class="p">,</span>
+                        <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="n">EntryNotFoundError</span><span class="p">,</span> <span class="n">LocalEntryNotFoundError</span><span class="p">,</span> <span class="n">HFValidationError</span><span class="p">):</span>
+                    <span class="c1"># not continue training, do not have v_head weight</span>
+                    <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;A </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pretrained_model</span><span class="p">)</span><span class="si">}</span><span class="s2"> model is loaded from &#39;</span><span class="si">{</span><span class="n">pretrained_model_name_or_path</span><span class="si">}</span><span class="s2">&#39;, &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;and no v_head weight is found. This IS expected if you are not resuming PPO training.&quot;</span>
+                    <span class="p">)</span>
+            <span class="c1"># load json</span>
+            <span class="k">if</span> <span class="n">is_resuming_training</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">index_file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="n">files_to_download</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">index</span><span class="p">[</span><span class="s2">&quot;weight_map&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">module</span> <span class="ow">in</span> <span class="n">k</span> <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">supported_modules</span><span class="p">]):</span>
+                        <span class="n">files_to_download</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">is_sharded</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">filename</span><span class="p">,</span> <span class="n">files_to_download</span><span class="p">,</span> <span class="n">is_sharded</span><span class="p">,</span> <span class="n">is_resuming_training</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_current_device</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The _get_current_device function is a class method that returns the current device.</span>
+
+<span class="sd">        :param cls: Indicate that the function is a method of the class</span>
+<span class="sd">        :return: The current device</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_split_kwargs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The _split_kwargs function is used to split the kwargs into three categories:</span>
+<span class="sd">            1. supported_kwargs - These are the arguments that are supported by this class and will be passed on to the parent class.</span>
+<span class="sd">            2. unsupported_kwargs - These are arguments that aren&#39;t supported by this class, but may be useful for other classes in a chain of inheritance (e.g., if you&#39;re using multiple mixins).</span>
+<span class="sd">            3. peft_kwargs - These are arguments specific to PEFT and will not be passed on to any other classes.</span>
+
+<span class="sd">        :param cls: Refer to the class itself</span>
+<span class="sd">        :param kwargs: Pass keyword arguments to the function</span>
+<span class="sd">        :return: A tuple of three dictionaries</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">supported_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">unsupported_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">peft_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">supported_args</span><span class="p">:</span>
+                <span class="n">supported_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unsupported_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">supported_kwargs</span><span class="p">,</span> <span class="n">unsupported_kwargs</span><span class="p">,</span> <span class="n">peft_kwargs</span>
+
+    <span class="k">def</span> <span class="nf">push_to_hub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">save_pretrained</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">state_dict</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state_dict&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">state_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">state_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;state_dict&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">state_dict</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the state_dict of the pretrained model.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Post initialization method. This method is called after the model is</span>
+<span class="sd">        instantiated and loaded from a checkpoint. It can be used to perform</span>
+<span class="sd">        additional operations such as loading the state_dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">compute_reward_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ppo_adapter_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The compute_reward_score function is used to compute the reward score for a given input.</span>
+<span class="sd">        The function takes in an input_ids tensor and returns a tensor of scores. The shape of the returned</span>
+<span class="sd">        tensor will be (batch_size, sequence_length). The higher the score, the more likely that token should be kept.</span>
+
+<span class="sd">        :param self: Represent the instance of the class</span>
+<span class="sd">        :param input_ids: Pass the input tokens to the model</span>
+<span class="sd">        :param attention_mask: Indicate which tokens are padding</span>
+<span class="sd">        :param ppo_adapter_name: Set the adapter back to its original state</span>
+<span class="sd">        :param **kwargs: Pass a variable number of arguments to a function</span>
+<span class="sd">        :return: The scores for the given input_ids</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_rm_adapter</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This model does not support reward modeling adapter.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># enable rm adapter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">set_adapter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rm_adapter_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+        <span class="n">base_model_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="p">(</span>
+            <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+            <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">,</span>
+            <span class="n">output_hidden_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">last_hidden_states</span> <span class="o">=</span> <span class="n">base_model_output</span><span class="o">.</span><span class="n">hidden_states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">last_hidden_states</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">set_adapter</span><span class="p">(</span><span class="n">ppo_adapter_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">scores</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.compute_reward_score" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">compute_reward_score</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ppo_adapter_name</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The compute_reward_score function is used to compute the reward score for a given input.
+The function takes in an input_ids tensor and returns a tensor of scores. The shape of the returned
+tensor will be (batch_size, sequence_length). The higher the score, the more likely that token should be kept.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>self</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Represent the instance of the class</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>input_ids</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Pass the input tokens to the model</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>attention_mask</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicate which tokens are padding</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ppo_adapter_name</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set the adapter back to its original state</p>
+            </div>
+          </td>
+          <td>
+                <code>&#39;default&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Pass a variable number of arguments to a function</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The scores for the given input_ids</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/rl_trainer/models/modelling_base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_reward_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ppo_adapter_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The compute_reward_score function is used to compute the reward score for a given input.</span>
+<span class="sd">    The function takes in an input_ids tensor and returns a tensor of scores. The shape of the returned</span>
+<span class="sd">    tensor will be (batch_size, sequence_length). The higher the score, the more likely that token should be kept.</span>
+
+<span class="sd">    :param self: Represent the instance of the class</span>
+<span class="sd">    :param input_ids: Pass the input tokens to the model</span>
+<span class="sd">    :param attention_mask: Indicate which tokens are padding</span>
+<span class="sd">    :param ppo_adapter_name: Set the adapter back to its original state</span>
+<span class="sd">    :param **kwargs: Pass a variable number of arguments to a function</span>
+<span class="sd">    :return: The scores for the given input_ids</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_rm_adapter</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This model does not support reward modeling adapter.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># enable rm adapter</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">set_adapter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rm_adapter_name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+    <span class="n">base_model_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="p">(</span>
+        <span class="n">input_ids</span><span class="o">=</span><span class="n">input_ids</span><span class="p">,</span>
+        <span class="n">attention_mask</span><span class="o">=</span><span class="n">attention_mask</span><span class="p">,</span>
+        <span class="n">output_hidden_states</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">last_hidden_states</span> <span class="o">=</span> <span class="n">base_model_output</span><span class="o">.</span><span class="n">hidden_states</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">last_hidden_states</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">set_adapter</span><span class="p">(</span><span class="n">ppo_adapter_name</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pretrained_model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">scores</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.from_pretrained" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="n">from_pt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">model_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The from_pretrained function is used to instantiate a model from a pretrained checkpoint.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>cls</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Refer to the class that called this function</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>pretrained_model_name_or_path</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify the path to the pretrained model</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>from_pt</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>bool: Determine whether to load the model from a pytorch checkpoint or not</p>
+            </div>
+          </td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>*model_args</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Pass the positional arguments of the model</p>
+            </div>
+          </td>
+          <td>
+                <code>()</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Pass keyworded, variable-length argument list</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A model with the state_dict loaded from a file</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/rl_trainer/models/modelling_base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_pretrained</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="n">from_pt</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">model_args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The from_pretrained function is used to instantiate a model from a pretrained checkpoint.</span>
+
+<span class="sd">    :param cls: Refer to the class that called this function</span>
+<span class="sd">    :param pretrained_model_name_or_path: Specify the path to the pretrained model</span>
+<span class="sd">    :param from_pt: bool: Determine whether to load the model from a pytorch checkpoint or not</span>
+<span class="sd">    :param *model_args: Pass the positional arguments of the model</span>
+<span class="sd">    :param **kwargs: Pass keyworded, variable-length argument list</span>
+<span class="sd">    :return: A model with the state_dict loaded from a file</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">reward_adapter</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;reward_adapter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">is_trainable</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;is_trainable&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">trl_model_args</span><span class="p">,</span> <span class="n">pretrained_kwargs</span><span class="p">,</span> <span class="n">peft_quantization_kwargs</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_split_kwargs</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">pretrained_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;token&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">reward_adapter</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">is_trainable</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">trl_model_args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">pretrained_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">reward_adapter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reward_adapter</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;The `reward_adapter` argument should be &quot;</span>
+            <span class="s2">&quot;a string representing the name of local path or the&quot;</span>
+            <span class="s2">&quot; Hub id to the Reward Modeling adapter.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+
+        <span class="n">remote_adapter_config</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">local_adapter_present</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;adapter_config.json&quot;</span><span class="p">))</span>
+
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">transformers_parent_class</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+            <span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="o">*</span><span class="n">model_args</span><span class="p">,</span> <span class="o">**</span><span class="n">pretrained_kwargs</span>
+        <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">supported_pretrained_model_architectures</span><span class="p">):</span>
+        <span class="n">pretrained_model</span> <span class="o">=</span> <span class="n">pretrained_model_name_or_path</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;pretrained_model_name_or_path should be a string or a PreTrainedModel, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;but is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">pretrained_model</span><span class="p">,</span> <span class="o">**</span><span class="n">trl_model_args</span><span class="p">)</span>
+    <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">safe_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;model.safetensors&quot;</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;pytorch_model.bin&quot;</span><span class="p">)</span>
+
+        <span class="n">sharded_index_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;pytorch_model.bin.index.json&quot;</span><span class="p">)</span>
+        <span class="n">safe_sharded_index_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pretrained_model_name_or_path</span><span class="p">,</span> <span class="s2">&quot;model.safetensors.index.json&quot;</span><span class="p">)</span>
+        <span class="n">is_sharded</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">use_safe</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">safe_filename</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">safe_filename</span><span class="p">)):</span>
+            <span class="n">filename</span><span class="p">,</span> <span class="n">files_to_download</span><span class="p">,</span> <span class="n">is_sharded</span><span class="p">,</span> <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_checkpoint_from_hub</span><span class="p">(</span>
+                <span class="n">pretrained_model</span><span class="p">,</span>
+                <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                <span class="n">sharded_index_filename</span><span class="p">,</span>
+                <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">files_to_download</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">safe_filename</span><span class="p">,</span> <span class="n">files_to_download</span><span class="p">,</span> <span class="n">is_sharded</span><span class="p">,</span> <span class="n">is_resuming_training</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_checkpoint_from_hub</span><span class="p">(</span>
+                    <span class="n">pretrained_model</span><span class="p">,</span>
+                    <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                    <span class="n">safe_sharded_index_filename</span><span class="p">,</span>
+                    <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;model.safetensors&quot;</span><span class="p">,</span>
+                    <span class="n">model_index_name</span><span class="o">=</span><span class="s2">&quot;model.safetensors.index.json&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">use_safe</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">use_safe</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">from_pt</span><span class="p">:</span>
+            <span class="n">loading_func</span> <span class="o">=</span> <span class="n">load_file</span>
+            <span class="n">load_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">loading_func</span><span class="p">(</span><span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs_</span><span class="p">):</span>
+                <span class="n">tensors</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+                    <span class="n">unpacker</span> <span class="o">=</span> <span class="n">msgpack</span><span class="o">.</span><span class="n">Unpacker</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">read_size</span><span class="o">=</span><span class="mi">83886080</span><span class="p">,</span> <span class="n">max_buffer_size</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">unpacker</span><span class="p">:</span>
+                        <span class="n">key</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                        <span class="n">tensor</span> <span class="o">=</span> <span class="n">from_bytes</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                        <span class="n">tensors</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensor</span>
+                <span class="k">return</span> <span class="n">tensors</span>
+
+        <span class="k">if</span> <span class="n">is_resuming_training</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_sharded</span><span class="p">:</span>
+                <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+                <span class="k">for</span> <span class="n">shard_file</span> <span class="ow">in</span> <span class="n">files_to_download</span><span class="p">:</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="n">hf_hub_download</span><span class="p">(</span>
+                        <span class="n">pretrained_model_name_or_path</span><span class="p">,</span>
+                        <span class="n">shard_file</span><span class="p">,</span>
+                        <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">state_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">loading_func</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">state_dict</span> <span class="o">=</span> <span class="n">loading_func</span><span class="p">(</span><span class="n">filename</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">use_safe</span> <span class="k">else</span> <span class="n">safe_filename</span><span class="p">,</span> <span class="o">**</span><span class="n">load_kwargs</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">state_dict</span> <span class="o">=</span> <span class="n">pretrained_model_name_or_path</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">from_pt</span><span class="p">:</span>
+        <span class="n">lw</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;.weight&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">jax</span><span class="o">.</span><span class="n">default_device</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_get_current_device</span><span class="p">()):</span>
+            <span class="n">flax_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">tensor</span> <span class="ow">in</span> <span class="n">state_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">match_keywords</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;kernel&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;none&#39;</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.weight&#39;</span><span class="p">):</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="p">[:</span><span class="o">-</span><span class="n">lw</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.kernel&#39;</span>
+                <span class="n">key_tuple</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+                <span class="n">key_names</span> <span class="o">=</span> <span class="p">()</span>
+                <span class="n">tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">key_tuple</span><span class="p">:</span>
+                    <span class="n">key_names</span> <span class="o">+=</span> <span class="n">k</span><span class="p">,</span>
+                <span class="n">flax_dict</span><span class="p">[</span><span class="n">key_names</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensor</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">is_peft_model</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">current_device</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_current_device</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">is_resuming_training</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">post_init</span><span class="p">(</span><span class="n">state_dict</span><span class="o">=</span><span class="n">state_dict</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">supports_rm_adapter</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.post_init" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">post_init</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Post initialization method. This method is called after the model is
+instantiated and loaded from a checkpoint. It can be used to perform
+additional operations such as loading the state_dict.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/rl_trainer/models/modelling_base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Post initialization method. This method is called after the model is</span>
+<span class="sd">    instantiated and loaded from a checkpoint. It can be used to perform</span>
+<span class="sd">    additional operations such as loading the state_dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="lib.python.EasyDel.rl_trainer.models.modelling_base.FlaxPreTrainedModelWrapper.state_dict" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">state_dict</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return the state_dict of the pretrained model.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>lib/python/EasyDel/rl_trainer/models/modelling_base.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the state_dict of the pretrained model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Erfan Zare Chavoshi-EasyDel
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.cd18aaf1.min.js"></script>
+      
+    
+  </body>
+</html>
